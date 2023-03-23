@@ -13,7 +13,7 @@ public class SynchronizedMain {
     public static class Table {
 
         synchronized void printTable(int n) {//method IS synchronized
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i <= 20; i++) {
                 System.out.println(n * i);
                 try {
                     Thread.sleep(400);

@@ -3,7 +3,7 @@ package com.exam.thread.concurencyproblems;
 public class ConcurrencyProblems extends Thread {
 
     /*
-        Megvárni míg egy másik szál "lefusson" az  isAlive() metódussal tudjuk. Ekkor a Main szálunk várakozik.
+        Megvárni míg egy másik szál "lefusson" az  isAlive() metódussal tudjuk ( vagy join()). Ekkor a Main szálunk várakozik.
      */
     public static int amount = 0;
 

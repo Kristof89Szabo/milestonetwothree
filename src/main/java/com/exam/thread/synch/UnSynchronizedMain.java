@@ -13,7 +13,7 @@ public class UnSynchronizedMain {
     public static class Table {
 
         void printTable(int n) {//method not synchronized
-            for (int i = 1; i <= 100; i++) {
+            for (int i = 1; i <= 20; i++) {
                 System.out.println(n * i);
                 try {
                     Thread.sleep(400);

@@ -1,6 +1,24 @@
 package com.exam.thread;
 
-public class ThreadMain extends Thread {
+class Run1 extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Runner1: " + i);
+        }
+    }
+}
+
+class Run2 extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println("Runner2: " + i);
+        }
+    }
+}
+
+public class ThreadMain {
 
     public static void main(String[] args) {
         /*
@@ -11,14 +29,12 @@ public class ThreadMain extends Thread {
         Megvárni míg egy másik szál "lefusson" az  isAlive() metódussal tudjuk. Ekkor a Main szálunk várakozik.
 
          */
-        ThreadMain thread = new ThreadMain();
-        thread.start();
-        System.out.println("This code is outside of the thread");
-    }
+        Thread t1 = new Run1();
+        Thread t2 = new Run2();
+        t1.start();
+        t2.start();
 
-    @Override
-    public void run() {
-        System.out.println("This code is running in a thread");
+
     }
 
 }
