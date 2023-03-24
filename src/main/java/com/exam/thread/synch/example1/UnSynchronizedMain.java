@@ -1,18 +1,18 @@
-package com.exam.thread.synch;
+package com.exam.thread.synch.example1;
 
-public class SynchronizedMain {
+public class UnSynchronizedMain {
 
     public static void main(String[] args) {
-        Table obj1 = new Table();//only one object
-        MyThread1 t1 = new MyThread1(obj1);
-        MyThread2 t2 = new MyThread2(obj1);
+        Table obj = new Table();//only one object
+        MyThread1 t1 = new MyThread1(obj);
+        MyThread2 t2 = new MyThread2(obj);
         t1.start();
         t2.start();
     }
 
     public static class Table {
 
-        synchronized void printTable(int n) {//method IS synchronized
+        void printTable(int n) {//method not synchronized
             for (int i = 1; i <= 20; i++) {
                 System.out.println(n * i);
                 try {
@@ -53,4 +53,5 @@ public class SynchronizedMain {
         }
 
     }
+
 }

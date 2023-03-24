@@ -23,7 +23,7 @@ If PC has a multiple CPU:
 
 ### Disadvantage
 
-- Multiple thread can modify same data because it is under same memory area. (process)
+- Multiple thread can modify same data because it is under same memory area (heap), but every thread has a stack.
 - Hard to test.
 
 ### Create Threads
@@ -46,3 +46,40 @@ If PC has a multiple CPU:
 - We can give different priority to the threads (1-10)
 - default is 5. Executed in a FIFS(first in first served)
 - high priority served before lower, but depends on the underlying OS.
+
+### Intrinsic Lock (Monitor) [example](synch/example2/s02AppWithSync.java)
+
+A class will get a lock so no other thread has access for it and not able to modify it.
+
+![img.png](../../../../resources/thread/img_4.png)
+
+Every object has only **one** lock. So if we have 2 independent synchronized methods than the threads have to wait for
+each other to release the lock.
+
+[Problem](synch/example2/s03AppWithTwoSyncMethodProblem.java)
+
+[Solution](synch/example2/s04AppWithTwoSyncMethodSolution.java)
+
+### Lock with custom objects
+
+[Customer Object](synch/example2/s05AppWithCustomObjectLock.java)
+
+### Thread communication
+
+![img.png](../../../../resources/thread/img_5.png)
+
+What is the difference between wait and sleep?
+Let's discuss the difference between sleep and wait. They may seem to be very similar but there are fundamental
+differences between them.
+
+- you call wait on the Object while on the other hand you call sleep on the Thread itself
+- wait can be interrupter (this is why we need the InterruptedException) while on the other hand sleep can not
+- wait (and notify) must happen in a synchronized block on the monitor object whereas sleep does not
+- sleep operation does not release the locks it holds while on the other hand wait releases the lock on the object that
+  wait() is called on
+
+[Example](synch/example03/ThreadCommunication.java)
+
+### Deadlock
+
+![img.png](../../../../resources/thread/img_6.png)
