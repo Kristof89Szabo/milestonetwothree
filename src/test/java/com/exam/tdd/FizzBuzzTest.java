@@ -44,5 +44,20 @@ class FizzBuzzTest {
 
     }
 
+    @Test
+    void testThatConvertHandleFiveNumber() {
+        //Given
+        String expected1 = "Buzz";
+
+        //When
+        String actual1 = fizzbuzz.convert(5);
+
+        //Then
+        assertEquals(expected1, actual1);
+
+
+    }
+
+
 
 }
