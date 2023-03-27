@@ -19,11 +19,14 @@ class FizzBuzzTest {
     void testThatConvertHandleNotSpecialNumber() {
         //Given
         String expected1 = "1";
+        String expected2 = "2";
 
         //When
         String actual1 = fizzbuzz.convert(1);
+        String actual2 = fizzbuzz.convert(2);
         //Then
         assertEquals(expected1, actual1);
+        assertEquals(expected2, actual2);
 
     }
 
