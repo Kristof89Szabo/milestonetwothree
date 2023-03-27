@@ -30,4 +30,19 @@ class FizzBuzzTest {
 
     }
 
+    @Test
+    void testThatConvertHandleThreeNumber() {
+        //Given
+        String expected1 = "Fizz";
+
+        //When
+        String actual1 = fizzbuzz.convert(3);
+
+        //Then
+        assertEquals(expected1, actual1);
+
+
+    }
+
+
 }
