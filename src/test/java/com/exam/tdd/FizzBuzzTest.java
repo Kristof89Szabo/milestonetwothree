@@ -58,6 +58,21 @@ class FizzBuzzTest {
 
     }
 
+    @Test
+    void testThatConvertHandleFifteenNumber() {
+        //Given
+        String expected1 = "FizzBuzz";
+
+        //When
+        String actual1 = fizzbuzz.convert(15);
+
+        //Then
+        assertEquals(expected1, actual1);
+
+
+    }
+
+
 
 
 }
