@@ -32,6 +32,7 @@ If PC has a multiple CPU:
   [example](RunnableMain.java)
 - extend Thread:
   [example](ThreadMain.java)
+- implement Callable. Runnable **can not** return a value to the calling thread but **Callable can**. [Example](CallableMain.java)
 
 ### Daemon Thread vs Worker Thread
 
@@ -83,3 +84,21 @@ differences between them.
 ### Deadlock
 
 ![img.png](../../../../resources/thread/img_6.png)
+
+### Thread pools
+
+T.pools keep threads alive at the background and allow to reuse them later on.
+
+#### Executors:
+
+- SingleThread (Every process is executed by a new thread) [Example](executors/SingleThreadExecutor.java)
+
+- FixedThreadPool(n)  [Example](executors/FixedSizeThreadPools.java)
+    - if there is more task than thread these stores in **LinkedBlockingQueue** data structured.
+- CachedThreadPool - If all given threads are busy executing some tasks and a new task comes the pool will create and
+  add a new thread to the executor.
+    - If a thread remains idle for 60 secs then it is removed
+    - it is used for short parallel tasks
+- ScheduledExecutor: [Example](executors/ScheduledThreadPool.java)
+    - We can execute a given task at regular intervals, or we can delay.
+
