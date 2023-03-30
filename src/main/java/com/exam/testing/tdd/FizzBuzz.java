@@ -1,4 +1,4 @@
-package com.exam.tdd;
+package com.exam.testing.tdd;
 
 public class FizzBuzz {
 
