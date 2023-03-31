@@ -11,6 +11,10 @@ class SingletonEager {
         return singletonEagar;
     }
 
+    public void eagerMethod() {
+        System.out.println("I am a singleton eager");
+    }
+
 }
 
 class SingletonLazy {
@@ -22,21 +26,37 @@ class SingletonLazy {
     }
 
     public static SingletonLazy getInstance() {
+
+        //If we have more thread they will create more instance. -> synchronized() -> slow solution
         if (singletonLazy == null) {
-            singletonLazy = new SingletonLazy();
+            synchronized (SingletonLazy.class) {
+                singletonLazy = new SingletonLazy();
+            }
         }
         return singletonLazy;
     }
+
+    public void lazyMethod() {
+        System.out.println("I am a singleton lazy");
+    }
+
 }
 
 public class SingletonExample {
 
     public static void main(String[] args) {
-        SingletonEager singletonEager = SingletonEager.getInstance();
-        System.out.println(singletonEager.hashCode());
-
         SingletonEager singletonEager1 = SingletonEager.getInstance();
+        SingletonEager singletonEager2 = SingletonEager.getInstance();
+
         System.out.println(singletonEager1.hashCode());
+        System.out.println(singletonEager2.hashCode());
+        singletonEager1.eagerMethod();
+
+        SingletonLazy singletonLazy = SingletonLazy.getInstance();
+        SingletonLazy singletonLazy2 = SingletonLazy.getInstance();
+        System.out.println(singletonLazy.hashCode());
+        System.out.println(singletonLazy2.hashCode());
+        singletonLazy.lazyMethod();
     }
 
 }
