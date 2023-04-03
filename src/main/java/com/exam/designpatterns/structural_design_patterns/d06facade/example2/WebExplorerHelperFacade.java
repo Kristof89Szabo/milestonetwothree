@@ -1,4 +1,4 @@
-package com.exam.designpatterns.structural_design_patterns.d06facade;
+package com.exam.designpatterns.structural_design_patterns.d06facade.example2;
 
 import java.sql.Driver;
 
