@@ -180,7 +180,6 @@ information about the types of testing that will be performed, the objectives of
 and techniques that will be used, and the roles and responsibilities of the testing team members. Here are some key
 elements of a testing strategy:
 
-
 - `Testing Objectives`: The testing objectives should be aligned with the goals and requirements of the software system.
   The
   objectives should be specific, measurable, achievable, relevant, and time-bound (SMART).
@@ -219,3 +218,34 @@ A well-defined testing strategy is essential for ensuring that the software syst
 reliability, and functionality. By outlining the testing objectives, types of testing, testing techniques, test
 environment, test data, roles and responsibilities, and test metrics, the testing team can create a comprehensive and
 effective testing plan that will help to identify and resolve issues early in the development cycle.
+
+### Difference between unit, integration, functional and non-functional testing
+
+Unit, integration, functional, and non-functional testing are all different types of testing that are performed during
+software development to ensure the quality and reliability of the software system. Here are the key differences between
+these types of testing:
+
+- `Unit Testing`: Unit testing is the process of testing individual units or components of the software system, such as
+functions, methods, or classes. It is typically performed by developers to ensure that each unit of the software system
+works as expected and meets the required specifications.
+
+
+- `Integration Testing`: Integration testing is the process of testing how different units or components of the software
+system work together. It is typically performed after unit testing and before system testing to ensure that the
+integration between different units of the software system is functioning as expected.
+
+
+- `Functional Testing`: Functional testing is the process of testing the functionality of the software system. It involves
+testing how the software system behaves and whether it meets the specified requirements and specifications. Functional
+testing can be performed at various levels, such as system testing, acceptance testing, and regression testing.
+
+
+- `Non-functional Testing`: Non-functional testing is the process of testing the non-functional aspects of the software
+system, such as performance, scalability, reliability, security, and usability. Non-functional testing is typically
+performed after functional testing to ensure that the software system meets the desired quality standards.
+
+
+In summary, unit testing focuses on testing individual units or components of the software system, integration testing
+focuses on testing the integration between different units, functional testing focuses on testing the functionality of
+the software system, and non-functional testing focuses on testing the non-functional aspects of the software system.
+All of these types of testing are important for ensuring the quality and reliability of the software system.
