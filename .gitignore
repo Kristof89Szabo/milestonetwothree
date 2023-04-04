@@ -1,0 +1,22 @@
+# Ignore Gradle project-specific cache directory
+.gradle/
+
+# Ignore Gradle build output directory
+**/build/
+**/out/
+**/bin/
+**/generated/
+
+# Ignore Idea files
+.idea/
+.run/
+
+# Ignore log files
+**/*.log
+.project
+
+.DS_Store
+**/Thumbs.db
+
+# Ignore product csv sources and database provider db outputs
+**/*.db
