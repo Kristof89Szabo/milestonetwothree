@@ -1,7 +1,7 @@
 ### Topics:
 
-- Generics: [Readme](src/main/java/com/exam/generics/README.md)
-- Thread: [Readme](src/main/java/com/exam/thread/README.md)
-- Testing: [Readme](src/main/java/com/exam/testing/README.md)
-- Design patterns:
-- Azure: [Readme](src/main/java/com/exam/azure/README.md)
+- [Generics](src/main/java/com/exam/generics)
+- [Thread](src/main/java/com/exam/thread)
+- [Testing](src/main/java/com/exam/testing)
+- [Design patterns](src/main/java/com/exam/designpatterns)
+- [Azure](src/main/java/com/exam/azure)
