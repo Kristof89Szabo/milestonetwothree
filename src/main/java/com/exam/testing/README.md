@@ -1,3 +1,15 @@
+<!-- TOC -->
+* [Common vocabulary for testing](#common-vocabulary-for-testing)
+* [Fundamental concepts of software testing](#fundamental-concepts-of-software-testing)
+* [Established techniques for designing tests](#established-techniques-for-designing-tests)
+* [Value of testing to stakeholders](#value-of-testing-to-stakeholders)
+* [Testing techniques](#testing-techniques)
+* [BDD fundamentals with Gherkin](#bdd-fundamentals-with-gherkin)
+* [Testing Strategy](#testing-strategy)
+* [Difference between unit, integration, functional and non-functional testing](#difference-between-unit-integration-functional-and-non-functional-testing)
+<!-- TOC -->
+
+
 ### Common vocabulary for testing
 
 - `Test Case` - A set of utructions, conditions, or requirements used to test a specific feature or functionality
@@ -139,6 +151,51 @@ In summary, testing plays a crucial role in ensuring the quality,
 reliability, and functionality of a software system,
 and stakeholders at all levels benefit from it.
 
+### Testing techniques
+
+There are many different testing techniques that can be used to validate software systems and ensure that they meet the
+desired quality standards. Here are some of the most commonly used testing techniques:
+
+
+- `Black-box testing`: Black-box testing is a technique that focuses on testing the external behavior of the software
+  system
+  without knowledge of its internal structure or implementation details. This technique is typically used to test the
+  functionality of the software system.
+
+
+- `White-box testing`: White-box testing is a technique that focuses on testing the internal structure and
+  implementation of
+  the software system. This technique is typically used to test the correctness of the software system's code.
+
+
+- `Grey-box testing`: Grey-box testing is a technique that combines elements of both black-box and white-box testing.
+  This technique is typically used to test the integration between different units of the software system.
+
+
+- `Regression testing`: Regression testing is a technique that involves retesting the software system after changes have
+  been made to ensure that the changes have not introduced new defects or issues.
+
+
+- `Exploratory testing`: Exploratory testing is a technique that involves testing the software system by exploring its
+  features and functionality without a predefined test plan. This technique is typically used to identify new defects or
+  issues that may not be discovered through other testing techniques.
+
+
+- `Stress testing`: Stress testing is a technique that involves testing the software system under high load or stress
+  conditions to ensure that it can handle heavy usage and still maintain its performance and stability.
+
+
+- `Performance testing`: Performance testing is a technique that involves testing the software system's performance and
+  scalability under different load and stress conditions.
+
+
+- `Security testing`: Security testing is a technique that involves testing the software system's security features to
+  ensure that it is protected against external threats such as hacking, viruses, and other attacks.
+
+These are just some of the many testing techniques that can be used to validate software systems and ensure that they
+meet the desired quality standards. The choice of testing technique will depend on the specific requirements and
+objectives of the software system being tested.
+
 ### BDD fundamentals with Gherkin
 
 BDD (Behavior-Driven Development) is a software development methodology that aims to improve communication between
@@ -226,24 +283,25 @@ software development to ensure the quality and reliability of the software syste
 these types of testing:
 
 - `Unit Testing`: Unit testing is the process of testing individual units or components of the software system, such as
-functions, methods, or classes. It is typically performed by developers to ensure that each unit of the software system
-works as expected and meets the required specifications.
+  functions, methods, or classes. It is typically performed by developers to ensure that each unit of the software
+  system
+  works as expected and meets the required specifications.
 
 
 - `Integration Testing`: Integration testing is the process of testing how different units or components of the software
-system work together. It is typically performed after unit testing and before system testing to ensure that the
-integration between different units of the software system is functioning as expected.
+  system work together. It is typically performed after unit testing and before system testing to ensure that the
+  integration between different units of the software system is functioning as expected.
 
 
-- `Functional Testing`: Functional testing is the process of testing the functionality of the software system. It involves
-testing how the software system behaves and whether it meets the specified requirements and specifications. Functional
-testing can be performed at various levels, such as system testing, acceptance testing, and regression testing.
+- `Functional Testing`: Functional testing is the process of testing the functionality of the software system. It
+  involves
+  testing how the software system behaves and whether it meets the specified requirements and specifications. Functional
+  testing can be performed at various levels, such as system testing, acceptance testing, and regression testing.
 
 
 - `Non-functional Testing`: Non-functional testing is the process of testing the non-functional aspects of the software
-system, such as performance, scalability, reliability, security, and usability. Non-functional testing is typically
-performed after functional testing to ensure that the software system meets the desired quality standards.
-
+  system, such as performance, scalability, reliability, security, and usability. Non-functional testing is typically
+  performed after functional testing to ensure that the software system meets the desired quality standards.
 
 In summary, unit testing focuses on testing individual units or components of the software system, integration testing
 focuses on testing the integration between different units, functional testing focuses on testing the functionality of
