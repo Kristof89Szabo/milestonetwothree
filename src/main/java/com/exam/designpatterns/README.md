@@ -1,5 +1,24 @@
 ## Design Patterns
 
+Design patterns are reusable solutions to common software design problems that have been identified and documented by software developers. They are helpful in improving the overall software design, making it more modular, scalable, and maintainable. However, it is important to understand that design patterns are not a one-size-fits-all solution and should only be used when appropriate.
+
+When to use design patterns:
+
+- When a particular design problem has been identified and needs to be solved.
+- When the software system is complex and needs to be structured in a more organized and maintainable way.
+- When you want to improve the scalability and flexibility of the software system.
+- When you want to improve the code reusability, reducing the overall development time and cost.
+- When you want to follow best practices and well-established design principles to ensure software quality. 
+
+When not to use design patterns:
+
+- When the problem is simple and straightforward, and a design pattern would only add unnecessary complexity.
+- When you are not familiar with the pattern and its implementation, leading to inefficient and buggy code.
+- When you are blindly following a pattern without understanding its purpose and applicability to the specific problem at hand.
+- When the pattern is already implemented in the programming language or framework being used.
+- When the pattern creates performance overhead, leading to slower execution and increased resource consumption.
+
+
 <u>Design Principles</u>:
 
 - high-level guidelines
