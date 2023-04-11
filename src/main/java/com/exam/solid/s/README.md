@@ -1,6 +1,6 @@
 ### Single Responsibility principle
 
-Every software component should have one and only one responsibility. 
+Every software component should have one and only one responsibility / single reason to change. 
 Component can be: 
 - module
 - class

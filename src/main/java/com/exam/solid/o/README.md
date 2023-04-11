@@ -11,9 +11,11 @@ A component should be extendable to add a new feature or
 to add a new behavior to it. 
 
 ![img.png](../../../../../resources/solid/o/img.png)
+
 This is not good practise. If we want to add new insurance we have to modify the discount calculator.
 
 ![img.png](../../../../../resources/solid/o/img_1.png)
+
 Better if we introduce an interface.
 
 Benefits:

@@ -2,7 +2,7 @@
 
 Objects should be replaceable with their subtypes without affecting the correctness of the program.
 
-![img.png](../../../../../resources/l/img.png)
+![img.png](../../../../../resources/solid/l/img.png)
 Hidden problems here with the bird.
 - Bird can fly but Ostrich can not fly. So LSP
 
