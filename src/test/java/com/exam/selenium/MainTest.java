@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,15 +18,20 @@ class MainTest {
 
     private static final String URL = "https://agreeable-beach-0514a6003.azurestaticapps.net/k1";
     private static WebDriver driver;
+    private static ChromeOptions chromeOptions;
+
 
     @BeforeAll
     static void setupAll() {
+        chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*"); // without this we get unable to establish connection to chrome. https://groups.google.com/g/chromedriver-users/c/xL5-13_qGaA
+        chromeOptions.addArguments("--headless");
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
     void setup() {
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @AfterEach
@@ -58,7 +64,7 @@ class MainTest {
         WebElement b = driver.findElement(By.id("b"));
         WebElement c = driver.findElement(By.id("c"));
         WebElement calculateButton = driver.findElement(By.id("submit"));
-        WebElement results = driver.findElement(By.id("results"));
+        WebElement results = driver.findElement(By.id("result"));
 
         a.sendKeys("1");
         b.sendKeys("2");
@@ -76,7 +82,7 @@ class MainTest {
         WebElement b = driver.findElement(By.id("b"));
         WebElement c = driver.findElement(By.id("c"));
         WebElement calculateButton = driver.findElement(By.id("submit"));
-        WebElement results = driver.findElement(By.id("results"));
+        WebElement results = driver.findElement(By.id("result"));
 
         calculateButton.click();
 
