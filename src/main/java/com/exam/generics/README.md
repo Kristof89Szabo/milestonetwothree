@@ -1,5 +1,9 @@
 ### Generics
 
+[Without Generics](nogen)
+
+[With Generics](yesgen)
+
 Generics in Java allow for creating classes, interfaces, and methods that can work with different types of data. There
 are several reasons why you should use and create generics in your Java code:
 
