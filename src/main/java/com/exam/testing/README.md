@@ -19,13 +19,11 @@
 - `Test Case` - A set of instructions, conditions, or requirements used to test a specific feature or functionality
   of a software application.
 
-
-    Example:
-      Check system behavior when valid email id and password is entered.
-      Check system behavior when invalid email id and valid password is entered.
-      Check system behavior when valid email id and invalid password is entered.
-      Check system behavior when invalid email id and invalid password is entered.
-
+  Example:
+  Check system behavior when valid email id and password is entered.
+  Check system behavior when invalid email id and valid password is entered.
+  Check system behavior when valid email id and invalid password is entered.
+  Check system behavior when invalid email id and invalid password is entered.
 
 - `Test Steps` - Test steps refer to the sequence of actions that are performed in order to execute a test case. They
   typically include the setup of the test environment, the execution of the test case, the observation of the results,
@@ -123,7 +121,9 @@
   outputs for a specific feature or function of the software application. The table is then used to design test cases
   that cover all possible scenarios.
 
-Example: Flight from input, Flight to input, Search button
+Example:
+
+Flight from input, Flight to input, Search button
 
 | Condition       | Rule 1   | Rule 2   | Rule 3   | Rule 4 |
 |-----------------|----------|----------|----------|--------|
@@ -228,7 +228,6 @@ desired quality standards. Here are some of the most commonly used testing techn
 
 ![](../../../../resources/testing/img_12.png)
 
-
 - `Performance testing`: Performance testing is a technique that involves testing the software system's performance and
   scalability under different load and stress conditions.
 
@@ -251,25 +250,37 @@ fundamental concepts of BDD and Gherkin:
 
 - `Feature`: A feature is a high-level description of the functionality that the software is expected to provide.
 
+
 - `Scenario`: A scenario is a specific use case that describes how the user interacts with the software and what the
   expected behavior should be.
+
 
 - `Given-When-Then`: Given-When-Then is a syntax used in Gherkin to describe the behavior of the software. It is
   composed of
   three parts: Given (the preconditions), When (the action taken by the user), and Then (the expected behavior or
   outcome).
 
+
 - `Background`: A background is a set of preconditions that apply to all scenarios within a feature. It is typically
-  used to
-  set up a common environment for all scenarios.
+  used to set up a common environment for all scenarios.
+
 
 - `Examples`: Examples are used to provide multiple sets of input values for a scenario. They are typically used to test
-  the
-  scenario with different inputs and expected outcomes.
+  the scenario with different inputs and expected outcomes.
 
-- `Tags`: Tags are used to categorize features and scenarios. They can be used to filter tests by category or to group
-  tests
-  together.
+
+- `Tags`: Tags are used to categorize features and scenarios. They can be used to filter tests by category or to
+  group tests together.
+
+      Example:
+
+      Feature: Google Searching
+      As a web surfer, I want to search Google, so that I can learn new things.
+    
+      Scenario: Simple Google search
+      Given a web browser is on the Google page
+      When the search phrase "panda" is entered
+      Then results for "panda" are shown
 
 Using Gherkin with BDD allows stakeholders to create a shared understanding of the software's behavior. By describing
 the software's behavior in a structured, easily readable format, developers and testers can collaborate more effectively
