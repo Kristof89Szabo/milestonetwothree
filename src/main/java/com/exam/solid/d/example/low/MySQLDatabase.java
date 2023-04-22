@@ -1,4 +1,6 @@
-package com.exam.solid.d.example;
+package com.exam.solid.d.example.low;
+
+import com.exam.solid.d.example.mid.Database;
 
 // low level module
 public class MySQLDatabase implements Database {

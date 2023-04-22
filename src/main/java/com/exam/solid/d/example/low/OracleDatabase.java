@@ -1,4 +1,6 @@
-package com.exam.solid.d.example;
+package com.exam.solid.d.example.low;
+
+import com.exam.solid.d.example.mid.Database;
 
 // this is another low level module
 public class OracleDatabase implements Database {

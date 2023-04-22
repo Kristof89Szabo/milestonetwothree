@@ -1,10 +1,12 @@
-package com.exam.solid.d.example;
+package com.exam.solid.d.example.high;
+
+import com.exam.solid.d.example.mid.Database;
 
 // the high level module
 public class DatabaseController {
 
 	// we program to an interface - so we can achieve loosely coupled architecture
-	private Database database;
+	private final Database database;
 	
 	public DatabaseController(Database database) {
 		this.database = database;
