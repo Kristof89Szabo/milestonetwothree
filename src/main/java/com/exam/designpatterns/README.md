@@ -1,5 +1,22 @@
 ## Design Patterns
 
+<!-- TOC -->
+  * [Design Patterns](#design-patterns)
+    * [**Creational patterns:**](#creational-patterns)
+      * [Singleton: Example](#singleton-example)
+      * [Factory: Example](#factory-example)
+      * [Builder: Example](#builder-example)
+      * [Prototype: Example](#prototype-example)
+    * [**Structural patterns:**](#structural-patterns)
+      * [Decorator: Example](#decorator-example)
+      * [Facade: Example](#facade-example)
+      * [Flyweight: Example](#flyweight-example)
+    * [**Behavioral patterns**:](#behavioral-patterns)
+      * [Strategy: Example](#strategy-example)
+      * [Observer: Example](#observer-example)
+      * [Command: Example](#command-example)
+<!-- TOC -->
+
 Design patterns are reusable solutions to common software design problems that have been identified and documented by software developers. They are helpful in improving the overall software design, making it more modular, scalable, and maintainable. However, it is important to understand that design patterns are not a one-size-fits-all solution and should only be used when appropriate.
 
 When to use design patterns:
@@ -36,7 +53,7 @@ When not to use design patterns:
 
 ### **Creational patterns:**
 
-#### Singleton: [Example](creational_design_patterns/d01singleton/SingletonExample.java)
+#### Singleton: [Example](creational_design_patterns/d01singleton)
 
 When to use it?
 
@@ -46,7 +63,7 @@ Not threadsafe but we can use synchronized keyword (slow solution) or use ENUM w
 
 ![img.png](../../../../resources/designpatterns/creational/img_1.png)
 
-#### Factory: [Example](creational_design_patterns/d02factory/FactoryPatternExample.java)
+#### Factory: [Example](creational_design_patterns/d02factory)
 
 - Help to create loosely coupled OOP design
 - Fundamental prblem with the **new** keyword
@@ -57,7 +74,7 @@ Not threadsafe but we can use synchronized keyword (slow solution) or use ENUM w
 
 ![img.png](../../../../resources/designpatterns/creational/img_3.png)
 
-#### Builder: [Example](creational_design_patterns/d03builder/BuilderPatternExample.java)
+#### Builder: [Example](creational_design_patterns/d03builder)
 
 - We can use it when we have large number of variables for an entity.
 - If we do not use it, maybe we have 3-4 constructor with different parameters.
@@ -67,7 +84,7 @@ Not threadsafe but we can use synchronized keyword (slow solution) or use ENUM w
 
 ![img.png](../../../../resources/designpatterns/creational/img_5.png)
 
-#### Prototype: [Example](creational_design_patterns/d04prototype/PrototypePatternExample.java)
+#### Prototype: [Example](creational_design_patterns/d04prototype)
 
 - Aim is to be able to copy existing object without depending on these given classes.
 

@@ -20,6 +20,13 @@
   of a software application.
 
 
+    Example:
+      Check system behavior when valid email id and password is entered.
+      Check system behavior when invalid email id and valid password is entered.
+      Check system behavior when valid email id and invalid password is entered.
+      Check system behavior when invalid email id and invalid password is entered.
+
+
 - `Test Steps` - Test steps refer to the sequence of actions that are performed in order to execute a test case. They
   typically include the setup of the test environment, the execution of the test case, the observation of the results,
   and the reporting of any defects or issues found.
