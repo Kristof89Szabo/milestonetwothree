@@ -102,3 +102,33 @@ T.pools keep threads alive at the background and allow to reuse them later on.
 - ScheduledExecutor: [Example](executors/ScheduledThreadPool.java)
     - We can execute a given task at regular intervals, or we can delay.
 
+### Project Loom -> Virtual Threads
+
+Project Loom aims to reduce the effort of writing, maintaining and observing high-throughput thread-based applications.
+
+Thread per-request model: It is a simple model where each request is handled by a separate thread.
+
+<u>Drawback</u>: 
+
+When a thread has performed a blocking operation like connecting to a database or making a network call 
+it will be blocked until the operation is complete. 
+This means that the thread will not be able to handle any other requests.
+
+
+<u>Solution</u>: 
+
+1. Add more hardware. This will allow you to increase the number of threads that 
+the Operating System can handle.
+2. Use asynchronous programming.
+This will allow you to use a single thread to handle multiple requests.
+
+![img.png](../../../../resources/thread/img_7.png)
+
+
+<u>Virtual Thread</u>:
+
+A virtual thread is a thread that is not tied to an Operating System thread.
+This means that you can create as many virtual threads as you want without worrying 
+about the Operating System thread limit.
+
+![img.png](../../../../resources/thread/img_8.png)
