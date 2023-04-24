@@ -78,6 +78,8 @@ Containerization provides several benefits in DevOps, such as:
 Overall, environment and containers are important concepts in DevOps, as they enable teams to create consistent,
 scalable, and reliable infrastructure for deploying and managing software applications.
 
+![img](../../../../../main/resources/testing/img_14.png)
+
 ### <u>Continuous Integration and Continuous Delivery/Deployment</u>
 
 ![img](../../../../../main/resources/devops/img.png)
