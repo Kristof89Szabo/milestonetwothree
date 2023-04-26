@@ -237,6 +237,18 @@ desired quality standards. Here are some of the most commonly used testing techn
 
 ![](../../../../resources/testing/img_13.png)
 
+- `Chaos testing`: Chaos testing, also known as "chaos engineering," is a type of testing that intentionally injects
+  various failures, faults, and disturbances into a software system to identify weaknesses and potential points of
+  failure. The goal is to proactively discover and address issues before they cause problems in production environments.
+
+  For example, in a chaos testing scenario, a team may intentionally shut down a service or randomly kill a process to see
+  how the system responds and whether it can recover from the failure without impacting overall system stability. The team
+  may also introduce network latency, simulate high traffic loads, or generate incorrect inputs to see how the system
+  handles unexpected conditions.
+
+![](../../../../resources/testing/img_15.png)
+
+
 These are just some of the many testing techniques that can be used to validate software systems and ensure that they
 meet the desired quality standards. The choice of testing technique will depend on the specific requirements and
 objectives of the software system being tested.
