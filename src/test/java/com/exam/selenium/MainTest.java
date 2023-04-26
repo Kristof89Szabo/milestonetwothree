@@ -89,4 +89,21 @@ class MainTest {
         assertEquals("NaN", results.getText());
     }
 
+    @Test
+    void testCheckWhenNegativeIsASide() {
+        driver.get(URL);
+        WebElement a = driver.findElement(By.id("a"));
+        WebElement b = driver.findElement(By.id("b"));
+        WebElement c = driver.findElement(By.id("c"));
+        WebElement calculateButton = driver.findElement(By.id("submit"));
+        WebElement results = driver.findElement(By.id("result"));
+
+        a.sendKeys("-1");
+        b.sendKeys("6");
+        c.sendKeys("7");
+        calculateButton.click();
+
+        assertEquals("12", results.getText());
+    }
+
 }
