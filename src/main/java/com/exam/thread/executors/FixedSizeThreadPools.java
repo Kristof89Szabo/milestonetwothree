@@ -14,8 +14,6 @@ class Work implements Runnable {
     @Override
     public void run() {
 
-        //Single thread that will execute the tasks sequentially so one after another.
-        //We have to shut down the executor.
         System.out.println("Task with id " + id + " is in work - thread id: " + Thread.currentThread().getId());
         long duration = (long) (Math.random() * 5);
         try {
