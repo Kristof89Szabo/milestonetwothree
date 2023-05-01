@@ -299,7 +299,7 @@ the software's behavior in a structured, easily readable format, developers and 
 with business analysts and other stakeholders to ensure that the software meets the desired requirements and
 specifications.
 
-### Testing Strategy
+### Testing Plan/Strategy
 
 A testing strategy is a plan that outlines how testing will be performed on a software system. It typically includes
 information about the types of testing that will be performed, the objectives of each type of testing, the testing tools
