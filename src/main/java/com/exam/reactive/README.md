@@ -11,23 +11,24 @@
 - **Non-blocking+async**: Ask a friend to call the company, but register for call back. So he does not need to wait as
   well.
 
-Reactive programming gives us an abstraction to read and write like **sync+blocking** code but behind a **Non-blocking+async** happens.
-
+Reactive programming gives us an abstraction to read and write like **sync+blocking** code but behind a *
+*Non-blocking+async** happens.
 
 #### Terminologies
 
 - Publisher
-  - Source
-  - Observable
-  - Upstream
-  - Producer
+    - Source
+    - Observable
+    - Upstream
+    - Producer
 - Subscriber
-  - Sink
-  - Observer
-  - Downstream
-  - Consumer
+    - Sink
+    - Observer
+    - Downstream
+    - Consumer
 
 Reactor Publisher has 2 implementation:
+
 1. Mono
 2. Flux
 
@@ -38,17 +39,21 @@ Reactor Publisher has 2 implementation:
 
 #### Why use mono?
 
-If we definitely know we are waiting 1 thing from publisher. 
+If we definitely know we are waiting 1 thing from publisher.
 
 [Example basic codes](mono)
 
 ![](../../../../resources/reactive/img_1.png)
-
-
-
 
 ### Flux
 
 - It emits **0 or N** item
 - Followed by an onComplete / onError.
 
+![](../../../../resources/reactive/img_2.png)
+
+### Flux - Emitting Items Programmatically
+
+- create
+- generate
+- push
