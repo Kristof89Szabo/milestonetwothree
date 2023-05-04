@@ -1,4 +1,4 @@
-package com.exam.reactive.mono;
+package com.exam.reactive.r01mono;
 
 import com.exam.reactive.util.Util;
 import reactor.core.publisher.Mono;

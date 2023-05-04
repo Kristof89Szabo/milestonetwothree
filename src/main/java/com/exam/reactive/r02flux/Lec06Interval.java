@@ -1,4 +1,4 @@
-package com.exam.reactive.flux;
+package com.exam.reactive.r02flux;
 
 import com.exam.reactive.util.Util;
 import reactor.core.publisher.Flux;
