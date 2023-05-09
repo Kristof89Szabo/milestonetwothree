@@ -123,11 +123,11 @@ Dockerfiles start from a parent image / **base image**. Example: [LINK](https://
 
 ```dockerfile
 
-ENV JAVA_VERSION openjdk:11:latest <- Varibale
+ENV JAVA_VERSION openjdk:11:latest # Varibale
 
-FROM ${JAVA_VERSION}  <- BASE IMAGE 
-ADD build/libs/JARNAME.jar JARNAME.jar <- Copy application file to the container. FROM to TO
-ENTRYPOINT ["java", "-jar", "JARNAME.jar"] <- The command executed when the container is started.
+FROM ${JAVA_VERSION}  # BASE IMAGE 
+ADD build/libs/JARNAME.jar JARNAME.jar # Copy application file to the container. FROM to TO
+ENTRYPOINT ["java", "-jar", "JARNAME.jar"] # The command executed when the container is started.
 ```
 
 ### Docker Volumes
@@ -155,5 +155,47 @@ This allows for files on the host system to be accessible and writable by the co
 container are reflected on the host system.
 
 Bind mounts are useful for sharing files between the host system and container, allowing for easy development and
-testing of code without having to rebuild the container image each time a change is made. 
+testing of code without having to rebuild the container image each time a change is made.
+
+### Docker Compose
+
+Docker Compose is a tool that is used to define and run multi-container Docker applications. It allows developers to
+define and configure multiple containers, their relationships and dependencies, and their configuration settings in a
+single file.
+
+This simplifies the deployment and management of complex applications that require multiple containers to
+run. Docker Compose uses a YAML file to define the services, networks, and volumes required for a multi-container
+application, and provides a CLI interface for building, starting, stopping, and managing the application.
+
+Example yml:
+
+```yaml
+version: '3.1' # if no  version is specified then v1 is assumed.
+
+services: # containers. same as docker run
+  servicename: # a friendly name. This is also DNS name inside network
+    image: # Optional, if you use build:
+    command: # Optional, replace the default CMD specified by the image
+    environment: # Optional, same  as -e in docker run
+    volumes: # Optional, same as -v in docker run  
+  servicename2: #new service just like above
+
+  volumes: #Optional, same as docker volume create
+  network: # Optional, same as docker network create
+
+```
+
+Bonus Note: version v2.x is actually better for local docker-compose use, and v3.x is better for use in server
+clusters (Swarm and Kubernetes)
+
+### Swarm
+
+Docker Swarm is a native clustering and orchestration tool for Docker containers. It allows developers to manage a
+cluster of Docker nodes and deploy and scale applications across them.
+
+Docker Swarm provides features such as load
+balancing, service discovery, rolling updates, and self-healing for containerized applications.
+
+It allows for easy scaling of applications and automatic distribution of containers across multiple nodes in the cluster. Docker Swarm also
+supports integration with other Docker tools such as Docker Compose and Docker Registry. 
 
