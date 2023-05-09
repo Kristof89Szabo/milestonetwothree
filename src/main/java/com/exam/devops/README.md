@@ -184,6 +184,19 @@ Containerization is considered to be a lightweight version of virtualization.
 In conclusion, system design is about tradeoffs. It is no different when it comes to bare metal,
 virtual machines and containers. There is no single right answer.
 
+### <u>Cloud Native vs Serverless</u>
+
+Native cloud refers to using the cloud provider's infrastructure and services to build and deploy applications. This
+often involves using infrastructure as a service (IaaS) offerings like virtual machines, storage, and networking, as
+well as platform as a service (PaaS) offerings like databases, messaging, and machine learning services. With native
+cloud, developers have more control over the infrastructure and can fine-tune the resources to meet specific needs.
+
+Serverless, on the other hand, is a cloud computing model where the cloud provider manages the infrastructure and
+automatically provisions and scales resources as needed. Developers write code in functions that are triggered by
+events, such as user requests or messages. The code runs in ephemeral containers and only incurs costs when it is
+actually executing. Serverless is often used for event-driven or microservices architectures, and can provide a more
+cost-effective and scalable solution for certain workloads.
+
 ### <u> Cloud computing </u>
 
 Cloud computing is the delivery of on-demand computing resources over the internet, including computing power, storage,
@@ -191,13 +204,15 @@ and applications. These resources can be accessed by users on a pay-per-use basi
 
 <u>Cloud computing has three main service models</u>:
 
-- Infrastructure as a Service (IaaS): This model provides users with access to computing resources such as virtual
+- _Infrastructure as a Service (IaaS)_: This model provides users with access to computing resources such as virtual
   machines, storage, and networking.
 
-- Platform as a Service (PaaS): This model provides users with a platform to develop, run, and manage applications
+
+- _Platform as a Service (PaaS)_: This model provides users with a platform to develop, run, and manage applications
   without worrying about the underlying infrastructure.
 
-- Software as a Service (SaaS): This model provides users with access to software applications that are hosted and
+
+- _Software as a Service (SaaS)_: This model provides users with access to software applications that are hosted and
   managed by the provider, with the users accessing the applications through a web browser or application programming
   interface (API).
 
@@ -215,8 +230,7 @@ and applications. These resources can be accessed by users on a pay-per-use basi
    collaboration.
 
 4. Flexibility: Cloud computing provides a range of services, including Infrastructure as a Service (IaaS), Platform as
-   a
-   Service (PaaS), and Software as a Service (SaaS), giving businesses the flexibility to choose the level of control
+   a Service (PaaS), and Software as a Service (SaaS), giving businesses the flexibility to choose the level of control
    and
    customization they need.
 
