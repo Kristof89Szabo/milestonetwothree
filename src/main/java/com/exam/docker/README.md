@@ -196,6 +196,36 @@ cluster of Docker nodes and deploy and scale applications across them.
 Docker Swarm provides features such as load
 balancing, service discovery, rolling updates, and self-healing for containerized applications.
 
-It allows for easy scaling of applications and automatic distribution of containers across multiple nodes in the cluster. Docker Swarm also
-supports integration with other Docker tools such as Docker Compose and Docker Registry. 
+It allows for easy scaling of applications and automatic distribution of containers across multiple nodes in the
+cluster. Docker Swarm also
+supports integration with other Docker tools such as Docker Compose and Docker Registry.
+
+![](../../../../resources/docker/img_4.png)
+
+2 types of Node:
+
+- Manager node : Maintains cluster management tasks
+- Worker Node : Receive and execute tasks **from** manager node
+
+![](../../../../resources/docker/img_5.png)
+
+![](../../../../resources/docker/img_6.png)
+
+To turn **ON** swarn:  `docker swarn init`
+
+#### Swarn CLI commands:
+
+`docker service COMMAND` : replace docker run command.
+
+- docker service create {imageName} ping 8.8.8.8: Swarm will create the image. For example, Alpine, which will ping the
+  Google DNS server.
+- docker service ls: Lists services.
+- docker service ps {serviceName/serviceId}: Shows tasks/containers in the service.
+- docker service update {serviceName/serviceId} --replicas {number}: Creates the given number of replicas from the given
+  service.
+- docker service rm {serviceName}: Removes the service and all tasks/containers under it.
+- docker node update --role manager {nodeName} - promote worker node to manager
+
+Read more: [LINK](https://docs.docker.com/engine/swarm/services/)
+
 
