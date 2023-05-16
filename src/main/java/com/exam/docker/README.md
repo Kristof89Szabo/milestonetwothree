@@ -49,27 +49,29 @@ Follow the steps:
 
 #### Docker CLI commands:
 
-- docker images : It shows all images on the computer
-- docker pull **imageName** : Pulls down the given image from dockerhub
-- docker run **{name}:{tag}** : Creates container from the given image:tag. (If the image not available in locally it
-  will pull from DockerHub)
-- docker build : Build image fom specific Dockerfile
-- docker ps / docker container ls : Shows running containers
-- docker ps -a / docker container ls -a : Shows all container
-- docker image ls :  Images that are currently available on your system and a container created from it.
-- docker image ls -a: Shows all image
-- docker stop **{containerId}** : Stops given container
-- docker log **{containerId}** : Shows logs for the given container.
-- docker container inspect mysql : Shows all information about the container
-- docker container stats : streaming live performance for all container
-- docker container port **{containerName}** : Shows publishing ports HOST:CONTAINER
+      - docker images : It shows all images on the computer
+      - docker pull **imageName** : Pulls down the given image from dockerhub
+      - docker run **{name}:{tag}** : Creates container from the given image:tag. (If the image not available in locally it
+        will pull from DockerHub)
+      - docker build : Build image fom specific Dockerfile
+      - docker ps / docker container ls : Shows running containers
+      - docker ps -a / docker container ls -a : Shows all container
+      - docker image ls :  Images that are currently available on your system and a container created from it.
+      - docker image ls -a: Shows all image
+      - docker stop **{containerId}** : Stops given container
+      - docker log **{containerId}** : Shows logs for the given container.
+      - docker container inspect mysql : Shows all information about the container
+      - docker container stats : streaming live performance for all container
+      - docker container port **{containerName}** : Shows publishing ports HOST:CONTAINER
+      - docker commit {runningContainerId/name} {new Image name} : We can create new image from modified container.  
+
 
 **Flags:**
 
-- -d / --detach: run at the background
-- -p {port}:{port} :
-- --name {chosenContainerName} : You can name your new container.
-- --network {chosenNetworkName} :
+      -d / --detach: run at the background
+      -p {port}:{port} :
+      --name {chosenContainerName} : You can name your new container.
+      --network {chosenNetworkName} :
 
 ### Docker/Host Port
 
@@ -93,12 +95,12 @@ be connected to a shared network.
 
 ![](../../../../resources/docker/img_3.png)
 
-- CLi commands:
-    - docker network ls : shows network
-    - docker network inspect : inspect a network
-    - docker network create --driver : create a network
-    - docker network connect : attach a network to a container
-    - docker network disconnect : detach a network from container
+      - CLi commands:
+          - docker network ls : shows network
+          - docker network inspect : inspect a network
+          - docker network create --driver : create a network
+          - docker network connect : attach a network to a container
+          - docker network disconnect : detach a network from container
 
 #### Default security:
 
@@ -106,6 +108,10 @@ be connected to a shared network.
 - Their inner-communication never leaves host
 - All externally exposed ports closed by default
 - You must manually expose port `-p` -> Better default security
+- Only Virtualization has full isolation : Containers has not. 
+
+> If the base OS has a vulnerability, it puts the containers in danger. Conversely, if the
+containers have vulnerabilities, attackers can gain access to the base OS.
 
 #### DNS - How containers find each other
 
@@ -126,8 +132,11 @@ Dockerfiles start from a parent image / **base image**. Example: [LINK](https://
 ENV JAVA_VERSION openjdk:11:latest # Varibale
 
 FROM ${JAVA_VERSION}  # BASE IMAGE 
-ADD build/libs/JARNAME.jar JARNAME.jar # Copy application file to the container. FROM to TO
+WORKDIR /usr/src/app
+
+ADD build/libs/JARNAME.jar . # Copy application file to the container WORKDIR. FROM to TO
 ENTRYPOINT ["java", "-jar", "JARNAME.jar"] # The command executed when the container is started.
+
 ```
 
 ### Docker Volumes
@@ -141,11 +150,15 @@ Volumes can be used to share data between multiple containers, back up or migrat
 to run in Docker containers.
 Volumes can be created and managed using Docker CLI or Docker Compose.
 
-We can name our volumes with flag:
+-v **{volumeName}**:/var/lib/mysql -> Give name for volume
 
-In case of mysql:
+-v /**{volumeName}**:/var/lib/mysql -> Create connection
 
-- -v **{volumeName}**:/var/lib/mysql
+    - CLi commands:
+      - docker volume create
+      - docker volume rm
+      - docker volume ls
+      - docker volume inspect
 
 ### Bind Mounting
 
@@ -156,6 +169,16 @@ container are reflected on the host system.
 
 Bind mounts are useful for sharing files between the host system and container, allowing for easy development and
 testing of code without having to rebuild the container image each time a change is made.
+
+- type : This can be bind, volume, tmpsf -> This is just temporarily binding
+- source: 
+- destination
+- readonly: 
+
+Example: 
+
+docker run -d --name devtest --mount source=myvol2,target=/app nginx:latest 
+
 
 ### Docker Compose
 
@@ -187,45 +210,5 @@ services: # containers. same as docker run
 
 Bonus Note: version v2.x is actually better for local docker-compose use, and v3.x is better for use in server
 clusters (Swarm and Kubernetes)
-
-### Swarm
-
-Docker Swarm is a native clustering and orchestration tool for Docker containers. It allows developers to manage a
-cluster of Docker nodes and deploy and scale applications across them.
-
-Docker Swarm provides features such as load
-balancing, service discovery, rolling updates, and self-healing for containerized applications.
-
-It allows for easy scaling of applications and automatic distribution of containers across multiple nodes in the
-cluster. Docker Swarm also
-supports integration with other Docker tools such as Docker Compose and Docker Registry.
-
-![](../../../../resources/docker/img_4.png)
-
-2 types of Node:
-
-- Manager node : Maintains cluster management tasks
-- Worker Node : Receive and execute tasks **from** manager node
-
-![](../../../../resources/docker/img_5.png)
-
-![](../../../../resources/docker/img_6.png)
-
-To turn **ON** swarn:  `docker swarn init`
-
-#### Swarn CLI commands:
-
-`docker service COMMAND` : replace docker run command.
-
-- docker service create {imageName} ping 8.8.8.8: Swarm will create the image. For example, Alpine, which will ping the
-  Google DNS server.
-- docker service ls: Lists services.
-- docker service ps {serviceName/serviceId}: Shows tasks/containers in the service.
-- docker service update {serviceName/serviceId} --replicas {number}: Creates the given number of replicas from the given
-  service.
-- docker service rm {serviceName}: Removes the service and all tasks/containers under it.
-- docker node update --role manager {nodeName} - promote worker node to manager
-
-Read more: [LINK](https://docs.docker.com/engine/swarm/services/)
 
 
