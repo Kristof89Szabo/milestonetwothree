@@ -1,3 +1,26 @@
+## Aspect to comparing database management systems
+
+- Storage Architecture
+    - Disk vs IOn-memory
+    - Format and Model
+- Data Model
+    - Relational vs NoSQL
+- Data Structure
+    - Static vs Dynamic schemas
+    - Normalizes vs Denormalized
+- Scalability/Cost
+- Availability and Resilience
+- Level of skills developer required
+    - Query language and/or APIs
+- Runtime Performance
+    - Latency for reads and writes
+- Rapid Development
+    - Predefined Schema or Schemaless
+- Data Integrity
+    - ACID vs BASE
+- Dataset Size
+- Developer community
+
 ## SQL
 
 SQL, which stands for Structured Query Language, is a programming language specifically designed for managing and
@@ -32,18 +55,37 @@ PROS:
 
 - Continues availability : data is distributed across multiple service and regions. No single point of failure.
 - Query speed
-- Agility : 
+- Agility :
+- Cost : easy cheap to scale up
 
 CONS:
 
+- No Standardized query language
+- Smaller user community
+- Learning curve : No enough to know SQL.
+- Data retrieval inconsistency : **NO** ACID compliant.
+  It is BASE: Basically Available, Soft state, Eventual consistency
+
 Types:
 
-- Key-value databases
-- column store : optimize for performance
-- Graph database : Shows different entities in the database and how they connect in a graphical way.
-- Document store database: Group of documents is called a collection.
+![](../../../../resources/database/img_5.png)
+
+- Wide-column database : optimize for performance
+
+It is between Relation databases and Key-value databases.
+
+![](../../../../resources/database/img_3.png)
+
+In Apache Cassandra:
+
+![](../../../../resources/database/img_4.png)
+
+- Document database: Group of documents is called a collection. No structure at all.
 
 ![](../../../../resources/database/img.png)
+
+- Key-value databases : Most simple NOSQL database type. Most of the time we use for cache.
+- Graph database : Shows different entities in the database and how they connect in a graphical way.
 
 #### ACID:
 
