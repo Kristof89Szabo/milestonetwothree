@@ -1,7 +1,7 @@
 ## Aspect to comparing database management systems
 
 - Storage Architecture
-    - Disk vs IOn-memory
+    - Disk vs In-memory
     - Format and Model
 - Data Model
     - Relational vs NoSQL
