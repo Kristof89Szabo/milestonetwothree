@@ -50,6 +50,33 @@ build/      # Not hidden directory, exclude that and the sub directory
 - Add environment variables, create directories, files etc..
 - Image versioning called: **tags**
 
+Many Docker images follow semantic versioning conventions, where tags represent major, minor, and patch versions.
+
+For example:
+
+nginx:1.19.6 represents major version 1, minor version 19, and patch version 6.
+
+Semantic versioning helps to convey the compatibility and significance of different image versions.
+
+Tag types:
+
+- `latest` : It is often used to represent the most recent version or build of an image. It is commonly assigned to the
+  latest stable release or build.
+
+- `slim` : reduced image size, only essential components and dependencies, making them lighter and more suitable for
+  environments with limited resources.
+
+
+- `alpine` : mages based on the Alpine Linux distribution. Alpine images are known for their small size and minimalistic
+  nature. They are commonly used for lightweight and resource-efficient deployments.
+
+
+- `bullseye`: mages based on the Debian GNU/Linux distribution with the code name "Bullseye".
+
+
+- `windowsservercore` : Windows-based Docker images. These images are used for running Windows-based applications in
+  containers.
+
 #### Docker Container
 
 - Actually starts the application
