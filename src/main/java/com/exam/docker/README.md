@@ -128,13 +128,15 @@ bridge:
   host’s networking directly. See use the host network.
 
 
-- `overlay`: Overlay networks connect multiple Docker daemons together and enable swarm services to communicate with each
+- `overlay`: Overlay networks connect multiple Docker daemons together and enable swarm services to communicate with
+  each
   other. You can also use overlay networks to facilitate communication between a swarm service and a standalone
   container, or between two standalone containers on different Docker daemons. This strategy removes the need to do
   OS-level routing between these containers. See overlay networks.
 
 
-- `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6 addressing. The VLAN driver builds on top of
+- `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6 addressing. The VLAN driver builds on top
+  of
   that in giving operators complete control of layer 2 VLAN tagging and even IPvlan L3 routing for users interested in
   underlay network integration. See IPvlan networks.
 
@@ -311,4 +313,17 @@ services: # containers. same as docker run
 Bonus Note: version v2.x is actually better for local docker-compose use, and v3.x is better for use in server
 clusters (Swarm and Kubernetes)
 
+#### Docker Registry
 
+Docker Registry is a service provided by Docker that serves as a central repository for storing and distributing Docker
+images. It is a key component in the Docker ecosystem and plays a crucial role in the containerization workflow.
+
+developers can easily share and distribute Docker images, ensuring consistent and reproducible deployments across
+different environments. It simplifies the process of managing and deploying containerized applications, promoting
+collaboration and efficiency in the containerization workflow.
+
+Docker Registry acts as a centralized repository for Docker images, providing storage, versioning, and
+distribution capabilities. It enables organizations to securely manage and share container images, facilitating
+efficient application deployment in a containerized environment.
+
+![](../../../../resources/docker/img_9.png)
