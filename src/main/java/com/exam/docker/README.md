@@ -142,9 +142,40 @@ be connected to a shared network.
           - docker network connect : attach a network to a container
           - docker network disconnect : detach a network from container
 
-Networking types:
+CNM - Container Networking Model
 
-bridge:
+a set of standard APIs, drivers, and plugins that enable containers to communicate with each other and with external
+networks.
+
+It abstracts the underlying networking infrastructure, allowing containers to be deployed and moved across
+different hosts without requiring manual network configuration.
+
+- `Network Sandbox`:
+  It is an isolated sandbox that holds the network configuration of containers
+  Sandbox is created when a user requests to generate an endpoint on the network
+
+
+- `Endpoints`:
+    - It can have several endpoints in a network, as it represents a container’s network configuration such as
+      IP-address,
+      MAC-address, DNS, etc.
+    - The endpoint establishes the connectivity for container services (within a network) with other services
+    - It helps in providing connectivity among the endpoints that belong to the same network and isolate them from the
+      rest.
+      So, whenever a network is created, or configuration is changed, the corresponding Network Driver will be notified
+      with
+      an event
+
+
+- `Network`:
+  Network: A network defines a logical grouping of endpoints that can communicate with each other. It provides
+  connectivity and isolation between containers.
+
+- `Network Drivers` :
+  A network driver implements the CNM APIs and handles the low-level operations required to create and manage network
+  resources. Different network drivers can be used to support various networking technologies.
+
+Networking types:
 
 - `bridge`: The default network driver. If you don’t specify a driver, this is the type of network you are creating.
   Bridge networks are usually used when your applications run in standalone containers that need to communicate. See
