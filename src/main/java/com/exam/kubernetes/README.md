@@ -1,4 +1,4 @@
-### Swarm and Kubernetes
+# Swarm and Kubernetes
 
 #### Orchestration
 
@@ -35,9 +35,21 @@ supports integration with other Docker tools such as Docker Compose and Docker R
 
 ![](../../../../resources/docker/img_6.png)
 
-To turn **ON** swarn:  `docker swarn init`
+#### Create Manager/Master Node and join a Worker under that
 
-#### Swarn CLI commands:
+To turn **ON** swarm master:
+
+- `docker swarm init --advertise-addr <master-node-ip>`
+
+You will get a command like this. You will be able to add worker Node to this cluster with it.
+
+- `docker swarm join --token <token> <master-node-ip>:<port>`
+
+On master Node check the cluster:
+
+- `docker node ls`
+
+#### Swarm CLI commands:
 
 `docker service COMMAND` : replace docker run command.
 
@@ -58,7 +70,7 @@ The overlay network enables communication between containers running on differen
 virtual network overlay on top of the physical network infrastructure, allowing containers to communicate with each
 other as if they were on the same network segment, regardless of their actual physical location.
 
-Commands under: [Docker Networks (Concepts)](#docker-networks-concepts)
+Commands under: [Docker Networks (Concepts)](../docker/README.md/#docker-networks-concepts)
 
 to create use this flag: --driver overlay {imageName}
 
@@ -69,6 +81,38 @@ and dynamically distributed among replicas of a service.
 
 The load balancer built-in to the overlay networking driver will do this job out of the box.
 VIP: Virtual ip address
+
+#### Swarm lock, unlock, autolock, backup
+
+- `Autolock`:
+  Autolock is a feature that automatically applies a lock to a resource after a certain condition or event occurs. It is
+  commonly used to enhance data security by preventing unauthorized access or modifications. For example, a file in the
+  Swarm network can be set to autolock after a certain period of inactivity or when a specific event triggers the
+  locking
+  mechanism. This helps ensure that sensitive data remains protected even if users forget to manually lock it.
+
+
+- `Lock`:
+  In the context of Swarm, lock refers to a mechanism that restricts access to a particular resource, such as a file or
+  a
+  piece of data stored in the Swarm network. When a resource is locked, it means that it cannot be modified or accessed
+  by
+  other users or processes until it is unlocked.
+
+
+- `Unlock`:
+  Unlocking is the process of removing the lock from a resource, thereby allowing it to be modified or accessed again.
+  It
+  grants permission to users or processes to perform operations on the locked resource.
+
+
+- `BackUp`:
+  Docker manager nodes store the swarm state and manager logs in the /var/lib/docker/swarm/ directory. This data
+  includes the keys used to encrypt the Raft logs. Without these keys, you cannot restore the swarm.
+
+
+[Lock LINK](https://docs.docker.com/engine/swarm/swarm_manager_locking/)
+[Backup LINK](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm)
 
 ### Kubernetes
 
@@ -204,7 +248,6 @@ Features:
 
 ![](../../../../resources/kubernetes/img_4.png)
 
-
 ```
 Service Types:
 - ClusterIp (default) : 
@@ -324,7 +367,6 @@ configurations and making them easily shareable and reproducible.
 
 Helm Charts is a bundle of YAML Files. We can create our Helm Charts with Helm, and we can push Helm Repository to share
 with others.
-
 
 ### Local Testing Kubernet
 
