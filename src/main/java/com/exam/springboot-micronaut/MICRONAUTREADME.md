@@ -71,13 +71,47 @@ The entry point for IoC is the Application context interface, which includes a r
 
 ### Micronaut Configuration
 
-By default, Netty runs on 8080. We can configure it in `application.yml`
+- Server Configuration : By default, Netty runs on 8080. We can configure it in `application.yml`
 
 ```yaml
 micronaut:
   server:
     port: 8100
 ```
+
+- Logging Configuration : Specifies the logging level for a specific package or class.
+
+```yaml
+logging:
+  level:
+    io.micronaut: DEBUG
+    org.example: INFO
+  config: classpath:logback.xml
+```
+
+- Data Source Configuration :
+
+```yaml
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/mydatabase
+    username: myuser
+    password: mypassword
+```
+
+- HTTP Client Configuration : Various properties to configure the behavior of the HTTP client, such as timeouts,
+  connection pool settings, etc.
+
+```yaml
+micronaut:
+  http:
+    client:
+      my-client:
+        connect-timeout: 5000
+        read-timeout: 10000
+```
+
+- Security Configuration : 
 
 ### Micronaut Validation
 
@@ -116,7 +150,6 @@ public class EmailController {
 Extra: We may configure validation using URI templates. The annotation @Get("/{id:4}") indicates that a variable can
 contain 4 characters max (is lower than 10000).
 
-Most common micronaut validation annotations:
 Micronaut is a modern JVM-based framework for building microservices and serverless applications. When it comes to
 validation, Micronaut provides support for data validation using annotations from the `javax.validation` package. Here
 are some of the most common Micronaut validation annotations:
@@ -162,7 +195,12 @@ and enable in application yml:
 ```yaml
 micronaut:
   security:
-    enabled: true
+    enabled: true  # Specifies whether security is enabled in the application.
+    anonymous: # Specifies whether anonymous access is allowed.
+      enabled: true
+    intercept-url: # Defines the access control for specific URL patterns.
+      '/api/public/**': permitAll()
+      '/api/private/**': isAuthenticated()
 ```
 
 Once you enable Micronaut security, Basic Auth is enabled by default.
