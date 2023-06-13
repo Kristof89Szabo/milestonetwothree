@@ -116,6 +116,35 @@ public class EmailController {
 Extra: We may configure validation using URI templates. The annotation @Get("/{id:4}") indicates that a variable can
 contain 4 characters max (is lower than 10000).
 
+Most common micronaut validation annotations:
+Micronaut is a modern JVM-based framework for building microservices and serverless applications. When it comes to
+validation, Micronaut provides support for data validation using annotations from the `javax.validation` package. Here
+are some of the most common Micronaut validation annotations:
+
+- `@NotNull`: This annotation is used to mark a field or parameter as not nullable.
+
+
+- `@NotBlank`: It is used to validate that a string field or parameter is not null or empty and contains at least one
+  non-whitespace character.
+
+
+- `@Size`: This annotation is used to validate the size of a collection, array, or string field or parameter. It can
+  specify the minimum and maximum size allowed.
+
+
+- `@Min` and `@Max`: These annotations are used to validate that a numeric field or parameter is greater than or equal
+  to a minimum value (`@Min`) or less than or equal to a maximum value (`@Max`).
+
+
+- `@Pattern`: This annotation is used to validate that a string field or parameter matches a specific regular expression
+  pattern.
+
+
+- `@Email`: It is used to validate that a string field or parameter represents a valid email address.
+
+These are some of the commonly used validation annotations in Micronaut. There may be other annotations available
+depending on the specific needs and dependencies of your application.
+
 ## Security
 
 We have to include dependency for security:
