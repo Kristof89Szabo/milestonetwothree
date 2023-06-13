@@ -15,6 +15,9 @@ Features:
 A bean is an object whose lifecycle is managed by the Micronaut IoC container. That lifecycle may include creation,
 execution, and destruction.
 
+`@PostConstruct` and `@PreDestroy ` are used to define lifecycle callbacks for beans. These annotations allow you to
+execute specific code after its initialization (@PostConstruct) or before the destruction of a bean (@PreDestroy).
+
 TheBeanContext abstraction which allows for dependency injection of classes annotated with `@Inject`.
 
 To look up the beans you can use:
@@ -153,9 +156,25 @@ Micronaut by default starts the server with disabled SSL. However, it supports H
 
 `@MicronautTest` is running your REAL application and starts the application context and injects all the beans.
 
+@MicronautTest annotation will replace this kind of repetitive code.
+
+```java
+@Test
+public void testHelloEndpoint(){
+        EmbeddedServer server=ApplicationContext.run(EmbeddedServer.class);
+        HttpClientConfiguration configuration=server.getApplicationContext().getBean(HttpClientConfiguration.class);
+        HttpClient client=RxHttpClient.create(server.getURL(),configuration);
+
+        HttpRequest<?> request=HttpRequest.GET("/hello");
+        String response=client.toBlocking().retrieve(request);
+        assertEquals("Hello World",response);
+        }
+```
+
 Pros:
 
-- Automatic start/stop EmbeddedServer (refers to the server that was started up for this test suite) and ApplicationContext.
+- Automatic start/stop EmbeddedServer (refers to the server that was started up for this test suite) and
+  ApplicationContext.
 - Automatic Bean Injection
 - @MockBean : his annotation tells Micronaut to replace the bean of type `CLAZZ` with a mock implementation.
 - TestPropertyProvider
