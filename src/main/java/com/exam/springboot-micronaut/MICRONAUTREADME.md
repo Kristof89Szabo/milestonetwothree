@@ -15,8 +15,28 @@ Features:
 A bean is an object whose lifecycle is managed by the Micronaut IoC container. That lifecycle may include creation,
 execution, and destruction.
 
-`@PostConstruct` and `@PreDestroy ` are used to define lifecycle callbacks for beans. These annotations allow you to
-execute specific code after its initialization (@PostConstruct) or before the destruction of a bean (@PreDestroy).
+
+- `Bean Definition`:
+  At this stage, Micronaut scans the application's classpath and identifies classes annotated with bean-related
+  annotations such as @Singleton, @Prototype, or @Controller. These annotations indicate that the classes should be
+  managed as beans by the Micronaut dependency injection system.
+
+
+- `Bean Initialization`:
+  Once a bean is defined, Micronaut creates an instance of the bean and performs constructor injection and property
+  injection based on the dependencies declared in the bean class. Dependencies can be autowired using annotations like
+  @Inject or @Value.
+
+
+- `Bean Post-Initialization`:
+  After the dependencies are injected, Micronaut invokes any methods annotated with @PostConstruct. These methods are
+  used
+  for any additional setup or initialization logic required by the bean. They are executed after the bean's dependencies
+  have been injected but before the bean is ready for use.
+
+
+- `@PostConstruct` and `@PreDestroy ` are used to define lifecycle callbacks for beans. These annotations allow you to
+  execute specific code after its initialization (@PostConstruct) or before the destruction of a bean (@PreDestroy).
 
 TheBeanContext abstraction which allows for dependency injection of classes annotated with `@Inject`.
 
