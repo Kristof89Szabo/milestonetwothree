@@ -111,8 +111,6 @@ micronaut:
         read-timeout: 10000
 ```
 
-- Security Configuration : 
-
 ### Micronaut Validation
 
 To be able to perform HTTP requests validation we should first include the following dependencies to our `pom.xml`:
@@ -250,3 +248,44 @@ Pros:
 Cons:
 
 - Everything is automatic -> Less Control.
+
+### Micronaut Data
+
+`Spring Data` rely heavily on reflection and compute queries at runtime -> cost of computation grows as your application
+grows.
+
+`Micronaut Data` is a database access toolkit that uses Ahead of Time (AoT) compilation to pre-compute queries for
+repository interfaces. A thin, lightweight runtime layer executes those queries.
+
+- Precomputes Queries at compilation time
+- Uses Micronaut`s reflection-free AOT
+- Zero runtime overhead database access solution
+- Compilation time checking (instead of findByName you write findByLami and Lami field not exist it will throw an
+  exception)
+- Smaller stack traces : Helps debugging.
+
+Two types of Micronaut Data:
+
+- `Micronaut Data JPA`
+    - Support for Hibernate / JPA
+    - Precomputes JPA-QL queries
+    - Many dialect
+    - Still leans on reflection / runtime proxies
+    - Write heavy
+    - Uses `@Repository` annotation
+
+
+- `Micronaut Data JDBC`
+    - Support for native JDBC
+    - Pure Data mapper (not an mapping tool!)
+    - Focused on DTOs and immutability
+    - Lighter weight
+    - Reflection and proxy free
+    - Read heavy
+    - Uses `@JdbcRepository(dialect="something")`
+
+![](../../../../resources/springboot-micronaut/img_3.png)
+
+
+
+

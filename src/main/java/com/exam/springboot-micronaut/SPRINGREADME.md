@@ -47,7 +47,7 @@ In Spring Boot, beans have a lifecycle that goes through several phases: instant
 The lifecycle is managed by the Spring container, and you can influence it by implementing specific interfaces or using
 annotations.
 
-![](../../../../resources/springboot/img.png)
+![](../../../../resources/springboot-micronaut/img.png)
 
 Scopes:
 
@@ -203,7 +203,7 @@ The maturity of RESTful services based on their architectural constraints and le
   API dynamically. Clients can navigate through the API by following these hypermedia links without prior knowledge of
   the API structure.
 
-![](../../../../resources/springboot/img_1.png)
+![](../../../../resources/springboot-micronaut/img_1.png)
 
 ### Data Validation
 
@@ -279,7 +279,7 @@ public class User {
 
 #### Cross-site request forgery
 
-![](../../../../resources/springboot/img_2.png)
+![](../../../../resources/springboot-micronaut/img_2.png)
 
 In a CSRF attack, the attacker crafts a malicious website or an email containing a link to a malicious website. When the
 victim visits this website, it may contain hidden code or scripts that make requests to the targeted website on behalf
