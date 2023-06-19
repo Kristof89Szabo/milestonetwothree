@@ -167,43 +167,7 @@ public class PaymentService {
 }
 ```
 
-### Richardson Maturity Model
 
-The maturity of RESTful services based on their architectural constraints and level of adoption of REST principles.
-
-- Level 0: The Swamp of POX (Plain Old XML)
-  At this level, services are not designed following REST principles. They often use XML as the data format.
-  Typically, uses one URI and one kind of method. (GET)
-
-
-- Level 1: Resources
-  Level 1 introduces the concept of resources, where each resource has a unique identifier (URI) and can be accessed
-  using simple HTTP methods such as GET, POST, PUT, and DELETE.
-  However, the communication style is still predominantly RPC-based, and the resources may not fully utilize the
-  capabilities of the HTTP protocol.
-  Still uses a single method (ie GET)
-
-  Examples:
-
-    - http://www.example.com/product/1234
-    - http://www.example.com/product/5687
-
-
-- Level 2: HTTP Verbs
-  Level 2 focuses on leveraging the full power of HTTP by utilizing the appropriate HTTP methods (GET, POST, PUT,
-  DELETE) for different operations on resources.
-  It emphasizes the use of self-descriptive messages and hypermedia links (HATEOAS)
-  to enable clients to discover and navigate the API dynamically.
-
-
-- Level 3: Hypermedia Controls
-  At Level 3, also known as "HATEOAS" (Hypermedia as the Engine of Application State), the API provides hypermedia
-  controls in responses.
-  These controls include links and other metadata that guide clients on how to interact with the
-  API dynamically. Clients can navigate through the API by following these hypermedia links without prior knowledge of
-  the API structure.
-
-![](../../../../resources/springboot-micronaut/img_1.png)
 
 ### Data Validation
 
