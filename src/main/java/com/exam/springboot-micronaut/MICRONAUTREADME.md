@@ -325,16 +325,17 @@ micronaut:
     intercept-url: # Defines the access control for specific URL patterns.
       '/api/public/**': permitAll()
       '/api/private/**': isAuthenticated()
-```
+``` 
 
+##### Basic Auth
 Once you enable Micronaut security, Basic Auth is enabled by default.
 
 Rules:
 
-- ` @Secured(SecurityRule.IS_ANONYMOUS)`
+- `@Secured(SecurityRule.IS_ANONYMOUS)`
 - `@Secured(SecurityRule.IS_AUTHENTICATED)` : If we put this to class level, the whole controller it is available only
   for
-  succesfully authenticated users. This can be overriden by method level (`@Secured(ADMIN)`).
+  successfully authenticated users. This can be overriden by method level (`@Secured(ADMIN)`).
 
 ### HTTPS
 
@@ -390,7 +391,7 @@ repository interfaces. A thin, lightweight runtime layer executes those queries.
 - Precomputes Queries at compilation time
 - Uses Micronaut`s reflection-free AOT
 - Zero runtime overhead database access solution
-- Compilation time checking (instead of findByName you write findByLami and Lami field not exist it will throw an
+- Compilation time checking (instead of findByName you write findByLami and Lami field not exist in the **ENTITY** it will throw an
   exception)
 - Smaller stack traces : Helps debugging.
 
@@ -415,6 +416,12 @@ Two types of Micronaut Data:
     - Uses `@JdbcRepository(dialect="something")`
 
 ![](../../../../resources/springboot-micronaut/img_3.png)
+
+
+Repository interfaces: 
+
+![](../../../../resources/springboot-micronaut/img_4.png)
+
 
 
 

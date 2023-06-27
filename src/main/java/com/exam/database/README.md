@@ -29,18 +29,52 @@ to define, manipulate, and control data stored in a relational database.
 
 ![](../../../../resources/database/img_1.png)
 
-PROS:
+**PROS**:
 
 - Standardized Schema
 - Large User community
 - Standardizes Query Language
 - ACID
 
-CONS:
+**CONS**:
 
 - Difficult clustering / scale
 - Data normalization : If we have more table it takes more time to connect and query.
 - First schema : We have to plan ahead what data and datatype need.
+
+
+**Join types**:
+
+![](../../../../resources/database/img_6.png)
+
+#### Functions
+
+Functions is a stored program that you can pass parameters into to return
+a value.
+
+Basic functions:
+
+- count(columName) : count the rows in the given column.
+
+```mysql
+SELECT count(firstname)
+FROM people;
+```
+
+- max(columName)
+- min(columName)
+- avg(columName)
+- sum(columName)
+- concat(columName, columName)
+
+```mysql
+SELECT concat(first_name, " ", last_name) as full_name
+FROM employees;
+```
+
+[MySql Functions](https://dev.mysql.com/doc/refman/8.0/en/built-in-function-reference.html)
+
+[Interactive SQL learning page](https://sqlbolt.com/)
 
 ## NoSql
 
