@@ -2,11 +2,14 @@
 
 API (Application programming interface) is a way for computers to talk to each other.
 
-![](../../../../resources/springboot-micronaut/img_6.png)
+![](../../../../resources/micronaut/img_6.png)
 
 The most common API standard used by mobile and web application to talk to the servers is called
 `REST`.
 It stands: **RE**presentational **S**tate **T**ransfer.
+
+<u>**It means when a RESTful API is called, the server will transfer to the client a representation of the state of the
+requested resource.**</u>
 
 **REST** is not a specification. It is a new set of rules that has been the common standard to build a
 web API since early 2000s.
@@ -33,7 +36,7 @@ In a RESTful architecture, the client is typically stateful. The statelessness o
 maintaining any knowledge of the client's state. However, the client can maintain its own state, such as user session
 information or context, between requests.
 
-![](../../../../resources/springboot-micronaut/img_5.png)
+![](../../../../resources/micronaut/img_5.png)
 
 Advantages:
 
@@ -96,17 +99,15 @@ Delete RequestBody:
   capabilities of the HTTP protocol.
   Still uses a single method (POST)
 
+_RPC: Remote Procedure Call is a software communication protocol that one program can use to request a service from a
+program located in another computer on a network without having to understand the network's details. RPC is used to
+call other processes on the remote systems like a local system. A procedure call is also sometimes known as a function
+call or a subroutine call._
 
-  _RPC: Remote Procedure Call is a software communication protocol that one program can use to request a service from a
-  program located in another computer on a network without having to understand the network's details. RPC is used to
-  call other processes on the remote systems like a local system. A procedure call is also sometimes known as a function
-  call or a subroutine call._
-
-  Examples:
+Examples:
 
     - http://www.example.com/product/1234
     - http://www.example.com/product/5687
-
 
 - Level 2: HTTP Verbs
   Level 2 focuses on leveraging the full power of HTTP by utilizing the appropriate HTTP methods (GET, POST, PUT,
@@ -123,19 +124,20 @@ Delete RequestBody:
   the API structure.
 
 Example:
+
 ```json
 {
-  "customerId" : "1234",
-  "customerName" : "Jane",
-  "_links" : {
-    "self" : {
-      "href" : "http://example.com/customers/1234"
+  "customerId": "1234",
+  "customerName": "Jane",
+  "_links": {
+    "self": {
+      "href": "http://example.com/customers/1234"
     }
   }
 }
 ```
 
-![](../../../../resources/springboot-micronaut/img_1.png)
+![](../../../../resources/micronaut/img_1.png)
 
 ___
 
@@ -151,10 +153,104 @@ Features:
 - Reactive Support
 - Cloud-Native Capabilities
 
+### ApplicationContext
+
+In the Micronaut Framework, an application context represents the central hub for managing the lifecycle of beans (
+components) and handling their dependencies. It provides features like dependency injection, bean instantiation, and
+lifecycle management.
+
+The `ApplicationContext` is a higher-level construct that serves as a container or holder for multiple
+application context
+
+```java
+public class MicronautApp {
+
+    public static void main(String[] args) {
+        ApplicationContext context = Micronaut.run(MicronautApp.class);
+
+        String[] beans = context.getBeanDefinitionNames(); // Shows all beans in the container.
+    }
+}
+```
+
+### Dependency Injection (Inversion of Control)
+
+Dependency injection is a core feature of the framework that allows objects to be created and wired together in a
+loosely coupled manner, promoting modular design, testability, and maintainability of the codebase.
+
+This is achieved
+through the use of an inversion of control (IoC) container, which manages the creation and injection of dependencies at
+runtime.
+
+```java
+
+@Controller("/api/content")
+public class ContentController {
+
+    private final ContentRepository repository;
+
+    public ContentController(ContentRepository contentRepository) {
+        this.repository = contentRepository;
+    }
+}
+```
+
+#### Types:
+
+- `Constructor based Dependency Injection` : This is preferred. ensures that all required dependencies are provided when
+  creating an object. It makes dependencies explicit and helps with easy testing and debugging.
+
+
+- `Setter based Dependency Injection` : Null checks are required, because dependencies may not be set at the moment.
+
+
+- `Field or Property-based Dependency Injection` : Field injection can make testing difficult since dependencies are not
+  explicitly defined in the constructor or setters. It also creates tight coupling between classes, making the code less
+  maintainable and harder to understand.
+
+If we hava an injection (interface for example) with more than one implementation,
+we can tell micronaut to use one of them with `@Qualifier`.
+
+Example:
+
+```java
+
+public interface PaymentGateway {
+    // ...
+}
+
+@Singleton
+@Qualifier("paypal")
+public class PaypalGateway implements PaymentGateway {
+    // ...
+}
+
+@Singleton
+@Qualifier("stripe")
+public class StripeGateway implements PaymentGateway {
+    // ...
+}
+
+@Singleton
+public class PaymentService {
+    private final PaymentGateway paymentGateway;
+
+    @Inject
+    public PaymentService(@Qualifier("paypal") PaymentGateway paymentGateway) {
+        this.paymentGateway = paymentGateway;
+    }
+
+    // ...
+}
+```
+
 ### Bean
 
-A bean is an object whose lifecycle is managed by the Micronaut IoC container. That lifecycle may include creation,
+A bean is an object whose lifecycle is managed by the Micronaut Framework's inversion of control (IoC) container.
+The IoC container is responsible for creating and managing objects (beans) in an application and injecting their
+dependencies. That lifecycle may include creation,
 execution, and destruction.
+
 
 - `Bean Definition`:
   At this stage, Micronaut scans the application's classpath and identifies classes annotated with bean-related
@@ -277,7 +373,10 @@ ___
 
 ### Micronaut Validation
 
-To be able to perform HTTP requests validation we should first include the following dependencies to our `pom.xml`:
+Our goal to validate early as possible (controller layer).
+
+Micronaut has a build in validation framework (package `javax.validation`) or/and Micronaut has another validation
+library, for that we should first include the following dependencies to our `pom.xml`:
 
 ```xml
 
@@ -378,6 +477,20 @@ Rules:
   for
   successfully authenticated users. This can be overriden by method level (`@Secured(ADMIN)`).
 
+#### Cross-site request forgery
+
+![](../../../../resources/micronaut/img_2.png)
+
+In a CSRF attack, the attacker crafts a malicious website or an email containing a link to a malicious website. When the
+victim visits this website, it may contain hidden code or scripts that make requests to the targeted website on behalf
+of the victim. These requests can be actions like changing account settings, making purchases, or even initiating
+financial transactions, depending on the privileges of the victim's account.
+
+To defend against CSRF attacks, web developers can implement various countermeasures:
+
+Using `anti-CSRF tokens`: Developers can include unique, random tokens in each form or request that modifies data on the
+website. These tokens are validated on the server side to ensure that the request originated from a legitimate source.
+
 ### HTTPS
 
 Micronaut by default starts the server with disabled SSL. However, it supports HTTPS out of the box.
@@ -421,6 +534,37 @@ Cons:
 
 ___
 
+### Object-relational mapping : ORM
+
+The idea behind it: We can convert an object to a row in a database.
+
+The `JPA` (Java Persistence API) specification is a Java specification that defines a standard way to manage relational
+data in Java applications. It provides a set of interfaces, classes, and annotations that outline the rules and
+guidelines for Object-Relational Mapping (ORM) in Java.
+
+`Hibernate` is an open-source object-relational mapping (ORM) framework that implements the JPA specification. It is one
+of the most widely used implementations of JPA and provides additional features beyond what is specified by JPA.
+Hibernate simplifies the development of database-driven applications by handling the mapping between Java objects and
+database tables automatically.
+
+Useful annotation:
+
+- @Entity(name="something") :  The name attribute in the @Entity annotation is used to specify the name of the entity in
+  the database.
+
+  By default, Hibernate will use the name of the Java class as the entity name in the database.
+
+
+- @GeneratedValue : s used in Hibernate to specify the strategy for generating primary key values for entities.
+
+
+- @Column(length=1000) : length = 1000 means that the corresponding column can store up to 1000 characters or bytes (
+  instead of 255 base length), depending on the underlying database's character encoding.
+
+
+- @Column(columnDefinition = "TEXT") : Change the column definition from `VARCHAR` to `TEXT`. Text can hold any length
+  of characters.
+
 ### Micronaut Data
 
 `Spring Data` rely heavily on reflection and compute queries at runtime -> cost of computation grows as your application
@@ -457,11 +601,45 @@ Two types of Micronaut Data:
     - Read heavy
     - Uses `@JdbcRepository(dialect="something")`
 
-![](../../../../resources/springboot-micronaut/img_3.png)
+![](../../../../resources/micronaut/img_3.png)
 
 Repository interfaces:
 
-![](../../../../resources/springboot-micronaut/img_4.png)
+![](../../../../resources/micronaut/img_4.png)
+
+### SQL s JPQL
+
+SQL is a powerful and flexible query language for interacting with relational databases at a low level, while JPQL is a
+higher-level language specific to JPA and object-oriented models. JPQL provides a more object-oriented approach to
+querying and works with entities and relationships defined in the ORM framework.
+
+SQL:
+
+- Syntax : SQL is a standard query language used to interact with relational databases. It has a specific syntax and set
+  of
+  keywords for performing operations like selecting, inserting, updating, and deleting data.
+
+- Database vs. Object-Relational Mapping : SQL operates directly on the database tables, columns, and rows. It is a
+  powerful and flexible language that allows
+  you to perform complex operations and aggregations on the database level.
+
+- Portability : SQL is a widely supported and standard query language that can be used with various databases. However,
+  each database may have its own specific dialect and extensions, leading to some differences in syntax and behavior.
+
+JPQL:
+
+- Syntax : JPQL is a query language specific to Java Persistence API (JPA) and is designed to work with object-oriented
+  models.
+  JPQL syntax is similar to SQL but with some differences to accommodate object-oriented concepts.
+
+- Database vs. Object-Relational Mapping : JPQL operates at a higher level of abstraction. It works with entities, their
+  attributes, and relationships defined in the object-relational mapping (ORM) framework, such as Hibernate. JPQL
+  queries are translated
+  into SQL queries by the JPA provider, which handles the mapping between objects and the database.
+
+- Portability: JPQL is specific to JPA and is designed to be database-agnostic. It allows you to
+  write queries that can be executed on different databases without modification, as long as the underlying JPA provider
+  supports the database.
 
 
 
