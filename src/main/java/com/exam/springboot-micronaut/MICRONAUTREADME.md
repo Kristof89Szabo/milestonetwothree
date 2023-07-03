@@ -2,7 +2,6 @@
 
 API (Application programming interface) is a way for computers to talk to each other.
 
-
 ![](../../../../resources/springboot-micronaut/img_6.png)
 
 The most common API standard used by mobile and web application to talk to the servers is called
@@ -28,13 +27,15 @@ PUT -> UPDATE
 DELETE -> DELETE
 ```
 
-A REST implementation should be `STATELESS`! It means a Client and a Server don`t need to store any information
-about each other, and every request and response (cycle) is **independent** from all others.
+A REST implementation should be `STATELESS`!
+
+In a RESTful architecture, the client is typically stateful. The statelessness of REST refers to the server not
+maintaining any knowledge of the client's state. However, the client can maintain its own state, such as user session
+information or context, between requests.
 
 ![](../../../../resources/springboot-micronaut/img_5.png)
 
 Advantages:
-
 
 - `Scalability`: REST APIs are highly scalable because they follow a stateless client-server model. The server does not
   need to maintain any client state between requests, which allows for better horizontal scaling and improved
@@ -65,20 +66,46 @@ The maturity of RESTful services based on their architectural constraints and le
 
 - Level 0: The Swamp of POX (Plain Old XML)
   At this level, services are not designed following REST principles. They often use XML as the data format.
-  Typically, uses one URI and one kind of method. (GET)
+  Typically, uses one URI and one kind of method. (POST)
 
+Example: Client -> /message
+
+Create RequestBody:
+
+```xml
+
+<create-message>
+    <message-content>Hello World!</message-content>
+    <message-author>Nagy Lajos</message-author>
+</create-message>
+```
+
+Delete RequestBody:
+
+```xml
+
+<delete-message>
+    <message-id>30</message-id>
+</delete-message>
+```
 
 - Level 1: Resources
   Level 1 introduces the concept of resources, where each resource has a unique identifier (URI) and can be accessed
   using simple HTTP methods such as GET, POST, PUT, and DELETE.
   However, the communication style is still predominantly RPC-based, and the resources may not fully utilize the
   capabilities of the HTTP protocol.
-  Still uses a single method (ie GET)
+  Still uses a single method (POST)
+
+
+  _RPC: Remote Procedure Call is a software communication protocol that one program can use to request a service from a
+  program located in another computer on a network without having to understand the network's details. RPC is used to
+  call other processes on the remote systems like a local system. A procedure call is also sometimes known as a function
+  call or a subroutine call._
 
   Examples:
 
-  - http://www.example.com/product/1234
-  - http://www.example.com/product/5687
+    - http://www.example.com/product/1234
+    - http://www.example.com/product/5687
 
 
 - Level 2: HTTP Verbs
@@ -94,6 +121,19 @@ The maturity of RESTful services based on their architectural constraints and le
   These controls include links and other metadata that guide clients on how to interact with the
   API dynamically. Clients can navigate through the API by following these hypermedia links without prior knowledge of
   the API structure.
+
+Example:
+```json
+{
+  "customerId" : "1234",
+  "customerName" : "Jane",
+  "_links" : {
+    "self" : {
+      "href" : "http://example.com/customers/1234"
+    }
+  }
+}
+```
 
 ![](../../../../resources/springboot-micronaut/img_1.png)
 
@@ -328,6 +368,7 @@ micronaut:
 ``` 
 
 ##### Basic Auth
+
 Once you enable Micronaut security, Basic Auth is enabled by default.
 
 Rules:
@@ -391,7 +432,8 @@ repository interfaces. A thin, lightweight runtime layer executes those queries.
 - Precomputes Queries at compilation time
 - Uses Micronaut`s reflection-free AOT
 - Zero runtime overhead database access solution
-- Compilation time checking (instead of findByName you write findByLami and Lami field not exist in the **ENTITY** it will throw an
+- Compilation time checking (instead of findByName you write findByLami and Lami field not exist in the **ENTITY** it
+  will throw an
   exception)
 - Smaller stack traces : Helps debugging.
 
@@ -417,8 +459,7 @@ Two types of Micronaut Data:
 
 ![](../../../../resources/springboot-micronaut/img_3.png)
 
-
-Repository interfaces: 
+Repository interfaces:
 
 ![](../../../../resources/springboot-micronaut/img_4.png)
 
