@@ -42,7 +42,6 @@ to define, manipulate, and control data stored in a relational database.
 - Data normalization : If we have more table it takes more time to connect and query.
 - First schema : We have to plan ahead what data and datatype need.
 
-
 **Join types**:
 
 ![](../../../../resources/database/img_6.png)
@@ -120,6 +119,16 @@ In Apache Cassandra:
 
 - Key-value databases : Most simple NOSQL database type. Most of the time we use for cache.
 - Graph database : Shows different entities in the database and how they connect in a graphical way.
+
+#### Normalization vs Denormalization
+
+Normalization - means that data is stored in multiple collections by referencing between them. Data is defined once and
+makes it easier to update. When it comes to reading data, the disadvantage of normalization is obvious. If you want to
+retrieve data from multiple collections, you need to perform multiple queries. As a result, the reading process is
+slower.
+
+Denormalization - Stores a large amount of nested data in a document. This model performs better reads but is slower for
+inserts and updates. This method of data storage takes up more memory.
 
 #### ACID:
 
