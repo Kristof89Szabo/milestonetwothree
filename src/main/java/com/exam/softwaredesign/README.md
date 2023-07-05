@@ -89,4 +89,18 @@ this is not a requirement of the SOA architecture patterns.
 
 [READ MORE](https://medium.com/@SoftwareDevelopmentCommunity/what-is-service-oriented-architecture-fa894d11a7ec)
 
+## Full Stack Application
 
+A full-stack application encompasses both the front-end and back-end components of a
+system. It means that the application is developed to work on both the client-side (front-end) and the server-side (
+back-end) of the software architecture.
+
+`Front-end` development often involves technologies like HTML, CSS, and JavaScript, as well as frameworks and libraries
+like React, Angular, or Vue.js. The front-end is responsible for presenting data to users and handling their
+interactions.
+
+`Back-end` of a full-stack app involves the server-side development that powers the application behind the scenes. It
+includes managing data, implementing business logic, handling requests, and communicating with databases and external
+services.
+
+![](../../../../resources/softwaredesign/img_2.png)
