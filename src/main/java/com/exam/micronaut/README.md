@@ -1,3 +1,45 @@
+### HTTP
+
+HTTP stands for hypertext transfer protocol, and it is the basis for almost all web applications. More specifically,
+HTTP is the method computers and servers use to request and send information.
+
+- HTTP 1.1 - 1997 (blocking if a request does not get answer)
+- HTTP 2.0 - 2015 (TCP - stream)
+- HTTP 3.0 - 2019 (Quick UDP Internet Connections)
+
+#### 1.1 vs 2.0
+
+- <u>**Multiplexing**</u>: HTTP/1.1 loads resources one after the other, so if one resource cannot be loaded, it blocks
+  all the
+  other resources behind it. In contrast, HTTP/2 is able to use a single TCP connection to send multiple streams of data
+  at once so that no one resource blocks any other resource. HTTP/2 does this by splitting data into binary-code
+  messages and numbering these messages so that the client knows which stream each binary message belongs to.
+
+
+- <u>**Server push**</u>: Typically, a server only serves content to a client device if the client asks for it. However,
+  this
+  approach is not always practical for modern webpages, which often involve several dozen separate resources that the
+  client must request. HTTP/2 solves this problem by allowing a server to "push" content to a client before the client
+  asks for it. The server also sends a message letting the client know what pushed content to expect – like if Bob had
+  sent Alice a Table of Contents of his novel before sending the whole thing.
+
+- <u>**Header compression**</u>: Small files load more quickly than large ones. To speed up web performance, both
+  HTTP/1.1 and
+  HTTP/2 compress HTTP messages to make them smaller. However, HTTP/2 uses a more advanced compression method called
+  HPACK that eliminates redundant information in HTTP header packets. This eliminates a few bytes from every HTTP
+  packet. Given the volume of HTTP packets involved in loading even a single webpage, those bytes add up quickly,
+  resulting in faster loading.
+
+
+- <u>**Prioritization**</u>: Prioritization refers to the order in which pieces of content are loaded. Prioritization
+  affects a webpage's load time. For example, certain resources, like large JavaScript files, may block the rest of the
+  page from loading if they have to load first. More of the page can load at once if these render-blocking resources
+  load last. In HTTP/2, developers have hands-on, detailed control over prioritization. This allows them to maximize
+  perceived and actual page load speed to a degree that was not possible in HTTP/1.1. HTTP/2 offers a feature called
+  weighted prioritization. This allows developers to decide which page resources will load first, every time.
+
+![](../../../../resources/micronaut/img_8.png)
+
 ### What is REST?
 
 API (Application programming interface) is a way for computers to talk to each other.
@@ -148,10 +190,29 @@ Java, Kotlin, and Groovy.
 
 Features:
 
-- Dependency Injection
-- Ahead-of-Time : AoT analyzes the application's code and dependencies at compile time.
-- Reactive Support
-- Cloud-Native Capabilities
+- `Dependency Injection` : Dependency injection is a software design pattern that allows the separation of object
+  dependencies from the code that uses them. Instead of creating and managing dependencies within a class, the
+  dependencies are provided externally, typically through constructor parameters or setters. This approach promotes
+  loose coupling, testability, and flexibility, as different implementations of dependencies can be easily swapped
+  without changing the dependent code.
+
+![](../../../../resources/micronaut/img_7.png)
+
+- `Ahead-of-Time` : AoT analyzes the application's code and dependencies at compile time. It performs the compilation step
+  ahead of time, before the application is actually executed. This means that all the necessary translations and
+  optimizations are done in advance. AOT eliminates the need for certain runtime operations, such as reflection and
+  dynamic proxies, which can slow down the application.
+
+
+- `Reactive Support` : Micronaut can take advantage of non-blocking and asynchronous programming techniques. Instead of
+  waiting for each task to finish, the program can continue executing other tasks while waiting for the results of
+  previous tasks.
+
+  [READ MORE](../reactive/README.md)
+
+
+- `Cloud-Native Capabilities` : Cloud Computing is a running applications on computing resources managed by cloud
+  providers, without having to purchase and manage hardware ourselves.
 
 ### ApplicationContext
 
@@ -251,7 +312,6 @@ The IoC container is responsible for creating and managing objects (beans) in an
 dependencies. That lifecycle may include creation,
 execution, and destruction.
 
-
 - `Bean Definition`:
   At this stage, Micronaut scans the application's classpath and identifies classes annotated with bean-related
   annotations such as @Singleton, @Prototype, or @Controller. These annotations indicate that the classes should be
@@ -293,15 +353,15 @@ To avoid this, we can use `@Bean(typed = CLAZZ)` annotation to limit the exposed
 @Singleton
 @Bean(typed = Engine.class)
 public class V8Engine implements Engine {
-    @Override
-    public String start() {
-        return "Starting V8";
-    }
+  @Override
+  public String start() {
+    return "Starting V8";
+  }
 
-    @Override
-    public int getCylinders() {
-        return 8;
-    }
+  @Override
+  public int getCylinders() {
+    return 8;
+  }
 }
 ```
 
@@ -381,8 +441,8 @@ library, for that we should first include the following dependencies to our `pom
 ```xml
 
 <dependency>
-    <groupId>io.micronaut</groupId>
-    <artifactId>micronaut-validation</artifactId>
+  <groupId>io.micronaut</groupId>
+  <artifactId>micronaut-validation</artifactId>
 </dependency>
 <dependency>
 <groupId>io.micronaut.configuration</groupId>
@@ -400,10 +460,10 @@ library, for that we should first include the following dependencies to our `pom
 @Controller("/email")
 public class EmailController {
 
-    @Post("/send")
-    public HttpResponse send(@Body @Valid Email email) {
-        return HttpResponse.ok(Collections.singletonMap("msg", "OK"));
-    }
+  @Post("/send")
+  public HttpResponse send(@Body @Valid Email email) {
+    return HttpResponse.ok(Collections.singletonMap("msg", "OK"));
+  }
 }
 
 ```
@@ -448,8 +508,8 @@ We have to include dependency for security:
 ```xml
 
 <dependency>
-    <groupId>io.micronaut</groupId>
-    <artifactId>micronaut-security</artifactId>
+  <groupId>io.micronaut</groupId>
+  <artifactId>micronaut-security</artifactId>
 </dependency>
 ```
 
@@ -584,22 +644,22 @@ repository interfaces. A thin, lightweight runtime layer executes those queries.
 Two types of Micronaut Data:
 
 - `Micronaut Data JPA`
-    - Support for Hibernate / JPA
-    - Precomputes JPA-QL queries
-    - Many dialect
-    - Still leans on reflection / runtime proxies
-    - Write heavy
-    - Uses `@Repository` annotation
+  - Support for Hibernate / JPA
+  - Precomputes JPA-QL queries
+  - Many dialect
+  - Still leans on reflection / runtime proxies
+  - Write heavy
+  - Uses `@Repository` annotation
 
 
 - `Micronaut Data JDBC`
-    - Support for native JDBC
-    - Pure Data mapper (not an mapping tool!)
-    - Focused on DTOs and immutability
-    - Lighter weight
-    - Reflection and proxy free
-    - Read heavy
-    - Uses `@JdbcRepository(dialect="something")`
+  - Support for native JDBC
+  - Pure Data mapper (not an mapping tool!)
+  - Focused on DTOs and immutability
+  - Lighter weight
+  - Reflection and proxy free
+  - Read heavy
+  - Uses `@JdbcRepository(dialect="something")`
 
 ![](../../../../resources/micronaut/img_3.png)
 
@@ -640,8 +700,3 @@ JPQL:
 - Portability: JPQL is specific to JPA and is designed to be database-agnostic. It allows you to
   write queries that can be executed on different databases without modification, as long as the underlying JPA provider
   supports the database.
-
-
-
-
-
