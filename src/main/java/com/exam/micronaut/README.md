@@ -1,7 +1,21 @@
+### TCP - Transmission Control Protocol
+
+TCP is a communication protocol that is part of the Internet Protocol Suite. It provides
+reliable and ordered delivery of data between two devices over a network.
+
+TCP ensures that data packets sent from one
+device are received correctly and in the correct order by the receiving device. It establishes a connection-oriented
+communication, meaning that a connection is established between the sender and receiver before data transmission begins.
+
+___
+
 ### HTTP
 
-HTTP stands for hypertext transfer protocol, and it is the basis for almost all web applications. More specifically,
-HTTP is the method computers and servers use to request and send information.
+HTTP (Hypertext Transfer Protocol) is an application-layer protocol that operates on top of TCP.
+
+
+HTTP defines how clients (such as web browsers) request resources from servers and how servers respond to those
+requests.
 
 - HTTP 1.1 - 1997 (blocking if a request does not get answer)
 - HTTP 2.0 - 2015 (TCP - stream)
@@ -23,6 +37,7 @@ HTTP is the method computers and servers use to request and send information.
   asks for it. The server also sends a message letting the client know what pushed content to expect – like if Bob had
   sent Alice a Table of Contents of his novel before sending the whole thing.
 
+
 - <u>**Header compression**</u>: Small files load more quickly than large ones. To speed up web performance, both
   HTTP/1.1 and
   HTTP/2 compress HTTP messages to make them smaller. However, HTTP/2 uses a more advanced compression method called
@@ -39,6 +54,8 @@ HTTP is the method computers and servers use to request and send information.
   weighted prioritization. This allows developers to decide which page resources will load first, every time.
 
 ![](../../../../resources/micronaut/img_8.png)
+
+___
 
 ### What is REST?
 
@@ -198,7 +215,8 @@ Features:
 
 ![](../../../../resources/micronaut/img_7.png)
 
-- `Ahead-of-Time` : AoT analyzes the application's code and dependencies at compile time. It performs the compilation step
+- `Ahead-of-Time` : AoT analyzes the application's code and dependencies at compile time. It performs the compilation
+  step
   ahead of time, before the application is actually executed. This means that all the necessary translations and
   optimizations are done in advance. AOT eliminates the need for certain runtime operations, such as reflection and
   dynamic proxies, which can slow down the application.
@@ -353,15 +371,15 @@ To avoid this, we can use `@Bean(typed = CLAZZ)` annotation to limit the exposed
 @Singleton
 @Bean(typed = Engine.class)
 public class V8Engine implements Engine {
-  @Override
-  public String start() {
-    return "Starting V8";
-  }
+    @Override
+    public String start() {
+        return "Starting V8";
+    }
 
-  @Override
-  public int getCylinders() {
-    return 8;
-  }
+    @Override
+    public int getCylinders() {
+        return 8;
+    }
 }
 ```
 
@@ -441,8 +459,8 @@ library, for that we should first include the following dependencies to our `pom
 ```xml
 
 <dependency>
-  <groupId>io.micronaut</groupId>
-  <artifactId>micronaut-validation</artifactId>
+    <groupId>io.micronaut</groupId>
+    <artifactId>micronaut-validation</artifactId>
 </dependency>
 <dependency>
 <groupId>io.micronaut.configuration</groupId>
@@ -460,10 +478,10 @@ library, for that we should first include the following dependencies to our `pom
 @Controller("/email")
 public class EmailController {
 
-  @Post("/send")
-  public HttpResponse send(@Body @Valid Email email) {
-    return HttpResponse.ok(Collections.singletonMap("msg", "OK"));
-  }
+    @Post("/send")
+    public HttpResponse send(@Body @Valid Email email) {
+        return HttpResponse.ok(Collections.singletonMap("msg", "OK"));
+    }
 }
 
 ```
@@ -508,8 +526,8 @@ We have to include dependency for security:
 ```xml
 
 <dependency>
-  <groupId>io.micronaut</groupId>
-  <artifactId>micronaut-security</artifactId>
+    <groupId>io.micronaut</groupId>
+    <artifactId>micronaut-security</artifactId>
 </dependency>
 ```
 
@@ -644,22 +662,22 @@ repository interfaces. A thin, lightweight runtime layer executes those queries.
 Two types of Micronaut Data:
 
 - `Micronaut Data JPA`
-  - Support for Hibernate / JPA
-  - Precomputes JPA-QL queries
-  - Many dialect
-  - Still leans on reflection / runtime proxies
-  - Write heavy
-  - Uses `@Repository` annotation
+    - Support for Hibernate / JPA
+    - Precomputes JPA-QL queries
+    - Many dialect
+    - Still leans on reflection / runtime proxies
+    - Write heavy
+    - Uses `@Repository` annotation
 
 
 - `Micronaut Data JDBC`
-  - Support for native JDBC
-  - Pure Data mapper (not an mapping tool!)
-  - Focused on DTOs and immutability
-  - Lighter weight
-  - Reflection and proxy free
-  - Read heavy
-  - Uses `@JdbcRepository(dialect="something")`
+    - Support for native JDBC
+    - Pure Data mapper (not an mapping tool!)
+    - Focused on DTOs and immutability
+    - Lighter weight
+    - Reflection and proxy free
+    - Read heavy
+    - Uses `@JdbcRepository(dialect="something")`
 
 ![](../../../../resources/micronaut/img_3.png)
 
