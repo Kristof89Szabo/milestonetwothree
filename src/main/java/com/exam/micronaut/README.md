@@ -1,4 +1,4 @@
-### TCP - Transmission Control Protocol
+## TCP - Transmission Control Protocol
 
 TCP is a communication protocol that is part of the Internet Protocol Suite. It provides
 reliable and ordered delivery of data between two devices over a network.
@@ -9,10 +9,9 @@ communication, meaning that a connection is established between the sender and r
 
 ___
 
-### HTTP
+## HTTP
 
 HTTP (Hypertext Transfer Protocol) is an application-layer protocol that operates on top of TCP.
-
 
 HTTP defines how clients (such as web browsers) request resources from servers and how servers respond to those
 requests.
@@ -200,7 +199,7 @@ Example:
 
 ___
 
-## Micronaut
+# Micronaut
 
 `Micronaut` is a modern, lightweight, and full-stack framework for building microservices and serverless applications in
 Java, Kotlin, and Groovy.
@@ -323,7 +322,7 @@ public class PaymentService {
 }
 ```
 
-### Bean
+## Bean
 
 A bean is an object whose lifecycle is managed by the Micronaut Framework's inversion of control (IoC) container.
 The IoC container is responsible for creating and managing objects (beans) in an application and injecting their
@@ -385,15 +384,115 @@ public class V8Engine implements Engine {
 
 (If we try to create a `V8Engine` it will throw NoSuchBeanException exception)
 
-Scopes:
+### Scopes:
 
-- `Singleton` : singleton pattern for bean
+- `Singleton` : Beans with singleton scope are created only once per application context and are shared across all
+  beans.
+
+  ```java
+  
+  @Singleton
+  public class RobotFather {
+      private final Robot robot;
+  
+      public RobotFather(Robot robot) {
+          this.robot = robot;
+      }
+  
+      @NonNull
+      public Robot child() {
+          return this.robot;
+      }
+  }
+  ```
+
 - `Prototype` : a new instance of the bean is created each time it is injected. It is a synonym for `@Bean` because the
   default scope is prototype.
-- `ThreadLocal` : is a custom scope that associates a bean per thread via a ThreadLocal
+
+  ```java
+  //Bean
+  @Prototype
+  public class MyPrototypeBean {
+      private final String name;
+  
+      public MyPrototypeBean(String name) {
+          this.name = UUID.randomUUID().toString();
+      }
+  
+      public String getName() {
+          return name;
+      }
+  }
+  ```
+
+  ```java
+  //2 service
+  @Singleton
+  public class MyService1 {
+      private final MyPrototypeBean prototypeBean;
+  
+      @Inject
+      public MyService(MyPrototypeBean prototypeBean) {
+          this.prototypeBean = prototypeBean;
+      }
+  
+      public void doSomething() {
+          System.out.println("Name from prototype bean: " + prototypeBean.getName());
+      }
+  }
+
+  @Singleton
+  public class MyService2 {
+      private final MyPrototypeBean prototypeBean;
+  
+      @Inject
+      public MyService(MyPrototypeBean prototypeBean) {
+          this.prototypeBean = prototypeBean;
+      }
+  
+      public void doSomething() {
+          System.out.println("Name from prototype bean: " + prototypeBean.getName());
+      }
+  }
+  ```
+
+Each service will receive its own unique instance of MyPrototypeBean. Therefore, the output of the doSomething()
+method in each service will be different.
+
+```java
+Name from prototype bean: e9d8520e-1d55-4c8f-9786-6fb65c2fe5f1
+Name from prototype bean: 4d9e7f7e-3517-487a-bfe6-971c6f2187b9
+```
+
+- `ThreadLocal` : is a custom scope that associates a bean per thread via a ThreadLocal.
+
+
 - `Context` : a bean is created at the same time as the ApplicationContext
-- `Infrastructure` : the @Context bean cannot be replaced
-- `Refreshable` : a custom scope that allows a bean’s state to be refreshed via the /refresh endpoint
+
+
+- `Infrastructure` : Infrastructure scope represents a bean that cannot be overridden or replaced using @Replaces
+  because it is critical to the functioning of the system.
+
+
+- `Refreshable` : a custom scope that allows a bean’s state to be refreshed via the /refresh endpoint or Publication of
+  a RefreshEvent.
+
+  ```java
+  
+  @Refreshable
+  public static class WeatherService {
+      private String forecast;
+  
+      @PostConstruct
+      public void init() {
+          forecast = "Scattered Clouds " + new SimpleDateFormat("dd/MMM/yy HH:mm:ss.SSS").format(new Date());// (2)
+      }
+  
+      public String latestForecast() {
+          return forecast;
+      }
+  }
+  ```
 
 [Documentation](https://docs.micronaut.io/latest/guide/#scopes)
 [BLOG](https://piotrminkowski.com/2019/04/15/micronaut-tutorial-beans-and-scopes/)
