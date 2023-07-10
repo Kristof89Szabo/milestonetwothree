@@ -130,7 +130,7 @@ slower.
 Denormalization - Stores a large amount of nested data in a document. This model performs better reads but is slower for
 inserts and updates. This method of data storage takes up more memory.
 
-#### ACID:
+## ACID:
 
 - Atomicity: Atomicity guarantees that a transaction is treated as a single, indivisible unit of work. Either all the
   operations within a transaction are successfully completed and permanently saved in the database, or if any part of
@@ -156,3 +156,28 @@ inserts and updates. This method of data storage takes up more memory.
   data remains intact and recoverable, maintaining the reliability of the database.
 
 ![](../../../../resources/database/img_2.png)
+
+## CAP theorem
+
+- Consistency : All nodes in a distributed system see the same data at the same time.
+- Availability : The system should always respond to client requests, even in the presence of failures.
+- Partition Tolerance : The system's ability to continue operating even if there are network failures or partitions
+  between nodes.
+
+![](../../../../resources/database/img_7.png)
+
+The CAP theorem states that in the presence of a network partition, a distributed system can only achieve two out of the
+three properties:
+
+- CA
+
+![](../../../../resources/database/img_8.png)
+
+- CP
+
+![](../../../../resources/database/img_10.png)
+
+- AP
+
+![](../../../../resources/database/img_9.png)
+
