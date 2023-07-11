@@ -460,8 +460,8 @@ Each service will receive its own unique instance of MyPrototypeBean. Therefore,
 method in each service will be different.
 
 ```java
-Name from prototype bean: e9d8520e-1d55-4c8f-9786-6fb65c2fe5f1
-Name from prototype bean: 4d9e7f7e-3517-487a-bfe6-971c6f2187b9
+Name from prototype bean:e9d8520e-1d55-4c8f-9786-6fb65c2fe5f1
+        Name from prototype bean:4d9e7f7e-3517-487a-bfe6-971c6f2187b9
 ```
 
 - `ThreadLocal` : is a custom scope that associates a bean per thread via a ThreadLocal.
@@ -496,8 +496,29 @@ Name from prototype bean: 4d9e7f7e-3517-487a-bfe6-971c6f2187b9
 
 [Documentation](https://docs.micronaut.io/latest/guide/#scopes)
 [BLOG](https://piotrminkowski.com/2019/04/15/micronaut-tutorial-beans-and-scopes/)
+___
 
-Extra:
+#### @Introspected
+
+To figure out a bean properties the old ways:
+
+```java
+BeanInfo info=Introspector.getBeanInfo(JavaBean.class );
+```
+
+This is an old reflection based solution.
+
+With `@Introspected` annotation
+
+```java
+BeanIntrospection<JavaBean> introspection=BeanIntrospection.getIntrospection(javaBean.class );
+```
+
+The @Introspected annotation is used to automatically generate code that can inspect and manipulate objects at runtime.
+It tells the Micronaut framework to analyze a particular class and generate code to handle it more easily.
+Reflection free Micronaut solution.
+
+**Extra**:
 
 The ApplicationContext extends a BeanContext and adds the concepts of configuration, environments.
 The entry point for IoC is the Application context interface, which includes a run method.
