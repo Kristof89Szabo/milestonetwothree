@@ -104,3 +104,32 @@ includes managing data, implementing business logic, handling requests, and comm
 services.
 
 ![](../../../../resources/softwaredesign/img_2.png)
+
+## API
+
+`Application programming interface`
+
+APIs are mechanisms that enable two software components to communicate with each other using a set of definitions and
+protocols. For example, the weather bureau’s software system contains daily weather data. The weather app on your phone
+“talks” to this system via APIs and shows you daily weather updates on your phone.
+
+APIs define how different software components should interact, specifying the types of requests that can be made, the
+format of the data that is exchanged, and the actions or responses that can be expected.
+
+- SOAP
+- REST
+- RPC
+- Websocket
+
+[READ MORE](https://aws.amazon.com/what-is/api/)
+
+## Microservices
+
+Microservices are an architectural and organizational approach to software development where software is composed of
+small independent services that communicate over well-defined APIs. These services are owned by small, self-contained
+teams.
+
+
+Microservices architectures make applications easier to scale and faster to develop, enabling innovation and
+accelerating time-to-market for new features.
+
