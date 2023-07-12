@@ -188,13 +188,25 @@ Sharding and partitioning are both about breaking up a large data set into small
 The difference is that sharding implies the data is spread across multiple computers while partitioning does not.
 Partitioning is about grouping subsets of data within a single database instance.
 
+![](../../../../resources/database/img_12.png)
+
 In many cases, the terms sharding and
 partitioning are even used synonymously, especially when preceded by the terms “horizontal” and “vertical.” Thus,
 “horizontal sharding” and “horizontal partitioning” can mean the same thing.
 
-("Database server is `sharded` and data is `partitioned`")
-
 ![](../../../../resources/database/img_11.png)
 
+("Database server is `sharded` and data is `partitioned`")
+
+**Advantage** of sharding:
+
+- Handle large Reads and Writes
+- Increase overall storage capacity
+- higher availability
+
+**Disadvantage** of sharding:
+
+- operationally complex
+- cross-shared quires expensive
 
 
