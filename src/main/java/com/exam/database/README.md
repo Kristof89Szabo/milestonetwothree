@@ -181,6 +181,80 @@ three properties:
 
 ![](../../../../resources/database/img_9.png)
 
+### Database basic security
+
+- `Physical access ` : If a data center is not physically protected, all other data security measures become
+  significantly less valuable. Locks on doors, cameras, etc.
+
+
+- `Encryption`: Encryption is used to protect data both at rest and in transit. Data at rest refers to data stored in
+  the
+  database files, while data in transit refers to data being transmitted between the database server and client
+  applications. Encryption algorithms are employed to convert sensitive information into unreadable ciphertext, which
+  can only be deciphered with the appropriate encryption keys.
+
+
+- `SQL injection attack prevention` : parameterized queries or prepared statements should be used. This technique
+  separates SQL code from user-supplied input, reducing the possibility of malicious SQL commands being injected into
+  queries.
+
+
+- `Database authorization and access control` : Users must be granted permissions to view and work with data in the
+  database. Privileges should only be granted in order for a user to perform a job. Shared or group login credentials
+  should be avoided. A principle of least privilege should be applied.
+
+
+- `Regular Patching and Updates` : It is crucial to keep the database software up to date with the latest security
+  patches
+  and updates. This helps protect against known vulnerabilities and exploits.
+
+
+- `Backup and Recovery` : Regularly backing up the database and storing backups in secure locations ensures that data
+  can
+  be restored in case of a security incident, data corruption, or system failure.
+
+![](../../../../resources/database/img_13.png)
+
+
+### Clustering and replication
+
+##### <u>Clustering</u>
+
+Database clustering is a technique of combining multiple database servers or nodes into a unified cluster to
+provide high availability, fault tolerance, and scalability for database systems (communication usually through a
+loadbalancer).
+
+Multiple database nodes work together as a single logical unite.
+
+- **Availability** : Replicating data across multiple nodes in the cluster. If one node fails, another node takes
+  over the processing responsibilities, ensuring that the database remains accessible and operational.
+
+
+- **Scalability** : Clustering enables horizontal scalability, allowing the addition of more nodes to the cluster to
+  handle increased data volume or user load (loadbalancer).
+
+
+- **Data synchronization**: In a clustered database, data synchronization mechanisms ensure that data changes made on
+  one node are propagated to the other nodes in the cluster. This ensures data consistency across the entire cluster and
+  enables seamless failover and load balancing.
+  Master(read and write all data) - slave node (read data)
+
+<u>Replication</u>
+
+Replication is nothing else but creating copies of your data and distributing those copies over multiple physical
+server.
+
+**Questions**:z
+
+- How to synchronize data copies?
+- Which copy to use?
+- Where to read and write?
+- Is this copy up-to-date?
+
+**Patterns:**
+
+- Master(read and write all data) - slave node (read data)
+
 ### Partitioning and Sharding
 
 Sharding and partitioning are both about breaking up a large data set into smaller subsets.
