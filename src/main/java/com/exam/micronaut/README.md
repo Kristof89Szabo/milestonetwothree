@@ -60,6 +60,8 @@ ___
 
 API (Application programming interface) is a way for computers to talk to each other.
 
+[MORE](../softwaredesign/README.md#api)
+
 ![](../../../../resources/micronaut/img_6.png)
 
 The most common API standard used by mobile and web application to talk to the servers is called
@@ -116,8 +118,11 @@ Advantages:
 
 
 - `Evolvability`: REST APIs promote loose coupling between the client and server. By using hypermedia-driven
-  interactions (HATEOAS), clients can discover and navigate resources dynamically, without prior knowledge of the API
-  structure. This decoupling allows for easier evolution and versioning of the API without breaking existing clients.
+  interactions (**HATEOAS** - Hypermedia as the Engine of Application State), clients can discover and navigate
+  resources dynamically, without prior knowledge of the API
+  structure.
+
+  This decoupling allows for easier evolution and versioning of the API without breaking existing clients.
 
 ___
 
@@ -125,7 +130,7 @@ ___
 
 The maturity of RESTful services based on their architectural constraints and level of adoption of REST principles.
 
-- Level 0: The Swamp of POX (Plain Old XML)
+- `Level 0` : The Swamp of POX (Plain Old XML)
   At this level, services are not designed following REST principles. They often use XML as the data format.
   Typically, uses one URI and one kind of method. (POST)
 
@@ -150,31 +155,25 @@ Delete RequestBody:
 </delete-message>
 ```
 
-- Level 1: Resources
-  Level 1 introduces the concept of resources, where each resource has a unique identifier (URI) and can be accessed
-  using simple HTTP methods such as GET, POST, PUT, and DELETE.
-  However, the communication style is still predominantly RPC-based, and the resources may not fully utilize the
-  capabilities of the HTTP protocol.
-  Still uses a single method (POST)
-
-_RPC: Remote Procedure Call is a software communication protocol that one program can use to request a service from a
-program located in another computer on a network without having to understand the network's details. RPC is used to
-call other processes on the remote systems like a local system. A procedure call is also sometimes known as a function
-call or a subroutine call._
+- `Level 1` : Resources
+  Level 1 introduces the concept of resources, where each resource has a unique identifier (URI) but still uses 1 HTTP
+  method (POST)
 
 Examples:
 
-    - http://www.example.com/product/1234
+    - http://www.example.com/products
     - http://www.example.com/product/5687
 
-- Level 2: HTTP Verbs
+- `Level 2` : HTTP Verbs
   Level 2 focuses on leveraging the full power of HTTP by utilizing the appropriate HTTP methods (GET, POST, PUT,
-  DELETE) for different operations on resources.
-  It emphasizes the use of self-descriptive messages and hypermedia links (HATEOAS)
-  to enable clients to discover and navigate the API dynamically.
+  DELETE) for different operations on resources. For each request will get a correct HTTP response code.
 
+Examples:
 
-- Level 3: Hypermedia Controls
+    - GET http://www.example.com/products
+      200 OK
+
+- `Level 3` : Hypermedia Controls
   At Level 3, also known as "HATEOAS" (Hypermedia as the Engine of Application State), the API provides hypermedia
   controls in responses.
   These controls include links and other metadata that guide clients on how to interact with the
@@ -464,6 +463,9 @@ Name from prototype bean:e9d8520e-1d55-4c8f-9786-6fb65c2fe5f1
         Name from prototype bean:4d9e7f7e-3517-487a-bfe6-971c6f2187b9
 ```
 
+- `RequestScope` - scope representing bean with lifecycle associated with the HTTP request, requires an HTTP module
+
+
 - `ThreadLocal` : is a custom scope that associates a bean per thread via a ThreadLocal.
 
 
@@ -567,6 +569,18 @@ micronaut:
         read-timeout: 10000
 ```
 
+If we want to change one of the property later on, and we don't want to rebuild a jar, we are able to override it:
+
+- Create an application.yml next to a jar. Run the jar it will grap the original yml and after it will notice the
+  external yml.
+- CLI argument can override application.yml -> key values
+
+```yaml
+java -jar micronaut-0.0.1-snapshot.jar --micronaut.server.port=9090
+```
+
+- System properties
+
 ___
 
 ### Micronaut Validation
@@ -589,8 +603,44 @@ library, for that we should first include the following dependencies to our `pom
 ```
 
 - @Validated will validate parameters on class level.
+  It means that all method parameters within this class will be subject to validation.
+  You can use Micronaut-specific validation annotations like @IntRange, @Email, etc., or custom validation rules for
+  method parameters, query parameters, and path variables.
 
-- @Valid on method level.
+```java
+import java.util.Collections;
+
+@Validated // (1)
+@Controller("/email")
+public class EmailController {
+
+    @Get("/send")
+    public HttpResponse send(@NotBlank String recipient, // (2)
+                             @NotBlank String subject) { // (2)
+        return HttpResponse.ok(Collections.singletonMap("msg", "OK"));
+    }
+}
+```
+
+- @Valid on method level. It is used to indicate that the Email object passed as the request body should be validated
+  using standard Java Bean Validation annotations.
+  
+
+```java
+
+import java.util.Collections;
+
+@Introspected
+public class Email {
+
+    @NotBlank
+    String subject;
+
+    @NotBlank
+    String recipient;
+
+}
+```
 
 ```java
 
@@ -603,7 +653,6 @@ public class EmailController {
         return HttpResponse.ok(Collections.singletonMap("msg", "OK"));
     }
 }
-
 ```
 
 Extra: We may configure validation using URI templates. The annotation @Get("/{id:4}") indicates that a variable can
