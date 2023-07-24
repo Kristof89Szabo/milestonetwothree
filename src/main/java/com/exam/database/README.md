@@ -102,6 +102,8 @@ CONS:
 Types:
 
 ![](../../../../resources/database/img_5.png)
+- Key-value databases : Most simple NOSQL database type. Most of the time we use for cache.
+
 
 - Wide-column database : optimize for performance
 
@@ -117,7 +119,6 @@ In Apache Cassandra:
 
 ![](../../../../resources/database/img.png)
 
-- Key-value databases : Most simple NOSQL database type. Most of the time we use for cache.
 - Graph database : Shows different entities in the database and how they connect in a graphical way.
 
 #### Normalization vs Denormalization

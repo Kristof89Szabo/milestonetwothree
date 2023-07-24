@@ -28,6 +28,8 @@ requests.
   at once so that no one resource blocks any other resource. HTTP/2 does this by splitting data into binary-code
   messages and numbering these messages so that the client knows which stream each binary message belongs to.
 
+![](../../../../resources/micronaut/img_9.png)
+
 
 - <u>**Server push**</u>: Typically, a server only serves content to a client device if the client asks for it. However,
   this
@@ -52,7 +54,6 @@ requests.
   perceived and actual page load speed to a degree that was not possible in HTTP/1.1. HTTP/2 offers a feature called
   weighted prioritization. This allows developers to decide which page resources will load first, every time.
 
-![](../../../../resources/micronaut/img_8.png)
 
 ___
 
