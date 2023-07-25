@@ -189,7 +189,7 @@ Example:
   "customerName": "Jane",
   "_links": {
     "self": {
-      "href": "http://example.com/customers/1234"
+      "href": "https://example.com/customers/1234"
     }
   }
 }
@@ -572,7 +572,7 @@ micronaut:
 
 If we want to change one of the property later on, and we don't want to rebuild a jar, we are able to override it:
 
-- Create an application.yml next to a jar. Run the jar it will grap the original yml and after it will notice the
+- Create an application.yml next to a jar. Run the jar it will grap the original yml, and after it will notice the
   external yml.
 - CLI argument can override application.yml -> key values
 

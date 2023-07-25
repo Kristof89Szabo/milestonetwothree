@@ -102,10 +102,11 @@ CONS:
 Types:
 
 ![](../../../../resources/database/img_5.png)
-- Key-value databases : Most simple NOSQL database type. Most of the time we use for cache.
+
+- `Key-value databases` : Most simple NOSQL database type. Most of the time we use for cache.
 
 
-- Wide-column database : optimize for performance
+- `Wide-column database` : optimize for performance
 
 It is between Relation databases and Key-value databases.
 
@@ -115,13 +116,14 @@ In Apache Cassandra:
 
 ![](../../../../resources/database/img_4.png)
 
-- Document database: Group of documents is called a collection. No structure at all.
+- `Document database` : Group of documents is called a collection. No structure at all.
 
 ![](../../../../resources/database/img.png)
 
-- Graph database : Shows different entities in the database and how they connect in a graphical way.
+- `Graph database` : Shows different entities in the database and how they connect in a graphical way.
+___
 
-#### Normalization vs Denormalization
+### Normalization vs Denormalization
 
 Normalization - means that data is stored in multiple collections by referencing between them. Data is defined once and
 makes it easier to update. When it comes to reading data, the disadvantage of normalization is obvious. If you want to
