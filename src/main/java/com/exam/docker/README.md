@@ -45,12 +45,15 @@ build/          # Not hidden directory, exclude that and the sub directory
 ```
 
 What should we ignore?
+
 - .git directory
 - build logs
 - temporary files
 - cache files
 - password, secret data
 - node_modules, .idea, build, target... directories
+
+___
 
 #### Docker Image
 
@@ -72,19 +75,22 @@ Tag types:
 - `latest` : It is often used to represent the most recent version or build of an image. It is commonly assigned to the
   latest stable release or build.
 
-- `slim` : reduced image size, only essential components and dependencies, making them lighter and more suitable for
+- `slim` : Reduced image size, only essential components and dependencies, making them lighter and more suitable for
   environments with limited resources.
 
 
-- `alpine` : mages based on the Alpine Linux distribution. Alpine images are known for their small size and minimalistic
+- `alpine` : Images based on the Alpine Linux distribution. Alpine images are known for their small size and
+  minimalistic
   nature. They are commonly used for lightweight and resource-efficient deployments.
 
 
-- `bullseye`: mages based on the Debian GNU/Linux distribution with the code name "Bullseye".
+- `bullseye`: Images based on the Debian GNU/Linux distribution with the code name "Bullseye".
 
 
 - `windowsservercore` : Windows-based Docker images. These images are used for running Windows-based applications in
   containers.
+
+___
 
 #### Docker Container
 
@@ -133,8 +139,8 @@ We need to expose the container port to make the service available to the outsid
 
 ### Shell inside Container
 
-- docker container run -it : Start new container interactively
-- docker container exec -it : Start existing container interactively
+- docker container run -it {containerName} sh: Start new container interactively
+- docker container exec -it {containerName} sh: Start existing container interactively
 
 ### Logging Drivers
 
@@ -212,6 +218,8 @@ Networking types:
 - `host`: For standalone containers, remove network isolation between the container and the Docker host, and use the
   host’s networking directly.
 
+  **Example.:** If we start a nginx container with host network we dont need to expose the container port.
+
 
 - `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6 addressing. The VLAN driver builds on top
   of that in giving operators complete control of layer 2 VLAN tagging and even IPvlan L3 routing for users interested
@@ -237,6 +245,9 @@ Networking types:
   Docker Hub or from third-party vendors. See the vendor’s documentation for installing and using a given network
   plugin.
 
+[WATCH THIS](https://youtu.be/bKFMS5C4CG0)
+___
+
 #### Default security:
 
 - Your apps (frontend/backend) sit on the same docker network
@@ -247,16 +258,18 @@ Networking types:
 
 > If the base OS has a vulnerability, it puts the containers in danger. Conversely, if the
 > containers have vulnerabilities, attackers can gain access to the base OS.
+___
 
 #### DNS - How containers find each other
 
 Docker daemon has a build-in DNS (Domain Name System) server that containers use by default.
-DNS allows containers to use domain names to communicate with each other instead of IP addresses. 
+DNS allows containers to use domain names to communicate with each other instead of IP addresses.
 
 Important to use **--name** flag for it.
 
 This allows for easier communication between containers and can help to abstract away network details from containerized
-applications. 
+applications.
+___
 
 ### Dockerfile
 
@@ -287,7 +300,6 @@ ENTRYPOINT ["java", "-jar", "JARNAME.jar"] # The command executed when the conta
 - **FROM**: Specifies the base image upon which you'll build your Docker image.
 - **WORKDIR**: Sets the working directory for subsequent instructions.
 - **LABEL**: Adds metadata to the image in key-value pairs.
-- **RUN**: Executes commands within the image during the build process.
 
 
 - **COPY**: Copy copies files or directories from the build context (the directory where the Dockerfile
@@ -301,8 +313,20 @@ ENTRYPOINT ["java", "-jar", "JARNAME.jar"] # The command executed when the conta
 
 - **VOLUME**: Creates a mount point for a volume.
 - **EXPOSE**: Informs Docker that the container listens on specific network ports at runtime.
-- **CMD**: Provides default commands or an entry point for the container when it starts.
-- **ENTRYPOINT**: Configures the container to run as an executable.
+
+
+- **RUN**: Executes commands within the image during the build process.
+  Each RUN instruction creates a new layer in the image, capturing the changes made by the command.
+  It is commonly used to install software, set up configurations, and perform other tasks required to create a
+  functioning image.
+  > RUN [apt-get update && apt-get install -y python3]
+
+- **CMD**:CMD instruction allows you to set a default command, which will be executed only when you run container
+  without specifying a command. If Docker container runs with a command, the default command will be ignored.
+  > CMD ["python3", "app.py"]
+- **ENTRYPOINT**: Configures the container to run as an executable. Parameters are not ignored when Docker container
+  runs with command line parameters.
+  > ENTRYPOINT ["java", "-jar", "/app/jarname.jar"]
 
 ### Docker Volumes
 
@@ -400,8 +424,6 @@ services: # containers. same as docker run
       - docker-compose down
       - docker-compose down --rmi all --volumes : delete all image and volumes
       - docker-compose <container name> : We can check running containers logs
-
-
 
 Bonus Note: version v2.x is actually better for local docker-compose use, and v3.x is better for use in server
 clusters (Swarm and Kubernetes)
