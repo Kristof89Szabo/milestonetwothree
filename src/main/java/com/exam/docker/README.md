@@ -328,6 +328,42 @@ ENTRYPOINT ["java", "-jar", "JARNAME.jar"] # The command executed when the conta
   runs with command line parameters.
   > ENTRYPOINT ["java", "-jar", "/app/jarname.jar"]
 
+___
+
+#### Multi-stage Builds
+
+It helps to optimize the image size -> If you have a lot of steps
+it is hard to read and maintain.
+
+**Example:**
+
+```dockerfile
+FROM node:12.13.0-alpine as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/build /usr/share/nginx/html
+```
+
+This Dockerfile has two FROM commands, with each one constituting a distinct build stage. These distinct commands are
+numbered internally, stage 0 and stage 1 respectively. However, stage 0 is given a friendly alias of build. This stage
+builds the application and stores it in the directory specified by the WORKDIR command. The resultant image is over 420
+MB in size.
+
+The second stage starts by pulling the official Nginx image from Docker Hub. It then copies the updated virtual server
+configuration to replace the default Nginx configuration. Then the COPY --from command is used to copy only the
+production-related application code from the image built by the previous stage. The final image is approximately 127 MB.
+
+
+
+___
+
 ### Docker Volumes
 
 A Docker volume is a way to store and manage data in Docker containers.
@@ -389,6 +425,8 @@ The term "tmpfs" stands for "temporary file system".
 - Automatic eviction: If the system runs out of memory and needs to reclaim memory resources, the kernel can evict data
   from tmpfs to make room for other processes. The evicted data will be lost, so it's important to be aware of the
   temporary nature of tmpfs.
+
+___
 
 ### Docker Compose
 

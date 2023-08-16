@@ -132,7 +132,7 @@ VIP: Virtual ip address
 [Lock LINK](https://docs.docker.com/engine/swarm/swarm_manager_locking/)
 
 [Backup LINK](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm)
-
+___
 ### Kubernetes
 
 Features:
@@ -170,7 +170,7 @@ Features:
         - `etcd`: (cluster brain) key value store about cluster state information. Used for Master node know what is the
           state for Worker Nodes.
           Example: If new POD creation request come in, Scheduler
-          will not where to deploy because of etcd.
+          will know where to deploy because of etcd.
 - `worker(slave)`
 
 [READ MORE](https://kubernetes.io/docs/concepts/overview/components/)
