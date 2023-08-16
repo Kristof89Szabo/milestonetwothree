@@ -1,0 +1,14 @@
+version: '3.3'
+service:
+  sample1:
+    image: 'nginx:latest'
+    ports:
+    - "80:80"
+    deploy:
+      replicas: 2
+  sample2:
+    image: 'nginx:latest'
+    ports:
+    - "9000:80"
+
+

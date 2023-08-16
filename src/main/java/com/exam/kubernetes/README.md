@@ -12,6 +12,15 @@ and providing mechanisms for load balancing and fault tolerance.
 By handling these tasks, orchestration simplifies the
 management and scaling of containerized applications, making them more reliable and efficient.
 
+Automate tasks like:
+
+- Deployment containers
+- Scaling
+- Resource allocations
+- Load Balancing
+- Health monitoring
+- etc.
+
 ### Swarm
 
 Docker Swarm is a native clustering and orchestration tool for Docker containers. It allows developers to manage a
@@ -28,7 +37,11 @@ supports integration with other Docker tools such as Docker Compose and Docker R
 
 2 types of Node:
 
-- Manager node : Maintains cluster management tasks
+- Manager node : Maintains cluster management tasks:
+    - Accepting commands and creating service objects
+    - Allocating IP addresses to tasks
+    - Assigning tasks to nodes
+    - Instructing a worker to run a task
 - Worker Node : Receive and execute tasks **from** manager node
 
 ![](../../../../resources/docker/img_5.png)
@@ -37,23 +50,20 @@ supports integration with other Docker tools such as Docker Compose and Docker R
 
 #### Create Manager/Master Node and join a Worker under that
 
-To turn **ON** swarm master:
-
-- `docker swarm init --advertise-addr <master-node-ip>`
-
-You will get a command like this. You will be able to add worker Node to this cluster with it.
-
-- `docker swarm join --token <token> <master-node-ip>:<port>`
-
-On master Node check the cluster:
-
-- `docker node ls`
+| Command                                                       | Note                            |
+|---------------------------------------------------------------|---------------------------------|
+| docker swarm init --advertise-addr <master-node-ip>           | Create cluster with master node |
+| docker swarm join --token < token > <master-node-ip>:< port > | Join to cluster as worker node  |
+| docker swarm join-token worker                                | Show join-token again           |
+| docker node ls                                                | Check nodes in the cluster      |
+| docker swarm leave --force                                    | WorkerNode leave the cluster    |
+| docker node rm <node-id>                                      | Remove node from cluster        |
 
 #### Swarm CLI commands:
 
 `docker service COMMAND` : replace docker run command.
 
-      - docker service create {imageName} ping 8.8.8.8: Swarm will create the image. For example, Alpine, which will ping the
+      - docker service create ping 8.8.8.8: Swarm will create the image. For example, Alpine, which will ping the
         Google DNS server.
       - docker service ls: Lists services.
       - docker service ps {serviceName/serviceId}: Shows tasks/containers in the service.
@@ -62,7 +72,20 @@ On master Node check the cluster:
       - docker service rm {serviceName}: Removes the service and all tasks/containers under it.
       - docker node update --role manager {nodeName} - promote worker node to manager
 
+Example command:
+`docker service create --name new_nginx --replicas 3 -p 80:80 nginx:latest`
+
 Read more: [LINK](https://docs.docker.com/engine/swarm/services/)
+
+### Swarm Deploy from YML:
+
+`Stack` function makes use of YML files to deploy multiple services at once.
+
+`docker stack deploy -c <yaml-filename>.yml <stack-name>`
+
+[Example yaml](../../../../resources/kubernetes/swarm-example.yml)
+
+___
 
 #### Overlay Networking : Scaling out our virtual network
 
@@ -88,30 +111,26 @@ VIP: Virtual ip address
   Autolock is a feature that automatically applies a lock to a resource after a certain condition or event occurs. It is
   commonly used to enhance data security by preventing unauthorized access or modifications. For example, a file in the
   Swarm network can be set to autolock after a certain period of inactivity or when a specific event triggers the
-  locking
-  mechanism. This helps ensure that sensitive data remains protected even if users forget to manually lock it.
+  locking mechanism. This helps ensure that sensitive data remains protected even if users forget to manually lock it.
 
 
 - `Lock`:
   In the context of Swarm, lock refers to a mechanism that restricts access to a particular resource, such as a file or
-  a
-  piece of data stored in the Swarm network. When a resource is locked, it means that it cannot be modified or accessed
-  by
-  other users or processes until it is unlocked.
+  a piece of data stored in the Swarm network. When a resource is locked, it means that it cannot be modified or
+  accessed by other users or processes until it is unlocked.
 
 
 - `Unlock`:
   Unlocking is the process of removing the lock from a resource, thereby allowing it to be modified or accessed again.
-  It
-  grants permission to users or processes to perform operations on the locked resource.
+  It grants permission to users or processes to perform operations on the locked resource.
 
 
 - `BackUp`:
   Docker manager nodes store the swarm state and manager logs in the /var/lib/docker/swarm/ directory. This data
   includes the keys used to encrypt the Raft logs. Without these keys, you cannot restore the swarm.
 
-
 [Lock LINK](https://docs.docker.com/engine/swarm/swarm_manager_locking/)
+
 [Backup LINK](https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm)
 
 ### Kubernetes
@@ -137,18 +156,21 @@ Features:
 
 - `master` :
     - 4 processes run on every master node:
-        - Api server : With a client, we interact with cluster through api server.
+        - `Api server `: With a client, we interact with cluster through api server.
 
-          `cluster gateway, acts as a gatekeeper for authentication.`
+          **cluster gateway, acts as a gatekeeper for authentication.**
 
-        - Scheduler : Example request to create a new POD.
-          Request arrives to API Server and after Scheduler gets the request and decide which worker node has resource
-          to handle one more POD. (**Important**: Kubelet will start the new POD in the node)
+        - `Scheduler` : Example request to create a new POD.
+          Request arrives to **API Server** and after **Scheduler** gets the request and decide which worker node has
+          resource to handle one more POD. (**Important**: Kubelet will start the new POD in the node)
 
-        - Controller Manager: Detect cluster state changes. Example:  If POD dies in a node, it will detect that and
-          reSchedule to create a new one.
+        - `Controller Manager`: Detect cluster state changes. Example:  If **POD** dies in a node, it will detect that
+          and reSchedule to create a new one.
 
-        - etcd: key value store about cluster state.
+        - `etcd`: (cluster brain) key value store about cluster state information. Used for Master node know what is the
+          state for Worker Nodes.
+          Example: If new POD creation request come in, Scheduler
+          will not where to deploy because of etcd.
 - `worker(slave)`
 
 [READ MORE](https://kubernetes.io/docs/concepts/overview/components/)
@@ -311,22 +333,22 @@ We can give variables 3 way:
 ````yaml
 
 env: # Give value
-  - name: DEMO_GREETING
-    value: "Hi There"
+- name: DEMO_GREETING
+  value: "Hi There"
 
 env: # Hide behind secret
-  - name: SECRET_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: secretName
-        key: username
+- name: SECRET_USERNAME
+  valueFrom:
+    secretKeyRef:
+      name: secretName
+      key: username
 
 env: # From config file
-  - name: LOG_LEVEL
-    valueFrom:
-      configMapKeyRef:
-        name: env-config
-        key: log_level
+- name: LOG_LEVEL
+  valueFrom:
+    configMapKeyRef:
+      name: env-config
+      key: log_level
 ````
 
 ##### Namespaces:
@@ -335,6 +357,11 @@ Kubernetes namespaces are a way to logically divide and isolate resources within
 
 They provide a virtual environment that allows different teams or projects to coexist within the same Kubernetes cluster
 without interfering with each other.
+
+If we use the default namespace and two team have same deployment name and config yaml. One of them will overwrite the others config.
+
+![](../../../../resources/kubernetes/img_10.png)
+
 
 Namespaces offer resource segregation, access control, and better resource management by providing a
 scope for naming resources such as pods, services, and deployments.
@@ -352,6 +379,11 @@ organize and manage applications and resources in a more structured manner.
 We should create namespaces because after a while we won't be able to manage everything in `default` namespace.
 
 ![](../../../../resources/kubernetes/img_7.png)
+
+
+We are able to limit resource usage  by namespace.
+
+![](../../../../resources/kubernetes/img_11.png)
 
 ##### Helm:
 
@@ -382,3 +414,7 @@ with others.
 - kubectl exec -it {podName} -- bin/bash : , it establishes a connection to the specified pod, opens an interactive Bash
   shell session, and allows you to directly interact with the container's environment, run commands, and perform various
   tasks within the context of that pod.
+
+`If there is no Ingress to give external ip to our claster we can still open a tunel for testing purpose.`
+
+[OPEN TUNNEL](https://minikube.sigs.k8s.io/docs/handbook/accessing/)

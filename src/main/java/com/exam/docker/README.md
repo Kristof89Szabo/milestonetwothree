@@ -19,7 +19,7 @@ Kernel "talks" with hardware and software components.
 
 **Docker** will virtualize the Application layer , **Virtualization** will the Kernel and the OS as well.
 
-![](../../../../resources/docker/img_1.png)
+![](../../../../resources/docker/img_3.png)
 
 Docker images smaller, faster to start. Linux based Docker image is not compatible with Windows OS, but
 Virtualization is.
@@ -37,11 +37,20 @@ Follow the steps:
 
 ```dockerignore
 
-.gradle/    # Hidden directory(because of . ) , exclude that and the sub directory
-build/      # Not hidden directory, exclude that and the sub directory
-*.jar       # All file which has .jar extension.
+.gradle/        # Hidden directory(because of . ) , exclude that and the sub directory
+build/          # Not hidden directory, exclude that and the sub directory
+*.jar           # All file which has .jar extension.
+**/folder-name  # In any folder which has the given folder name.
 
 ```
+
+What should we ignore?
+- .git directory
+- build logs
+- temporary files
+- cache files
+- password, secret data
+- node_modules, .idea, build, target... directories
 
 #### Docker Image
 
@@ -151,7 +160,7 @@ world.
 By default, each container in Docker has its own network stack and IP address, but Docker networks allow containers to
 be connected to a shared network.
 
-![](../../../../resources/docker/img_3.png)
+![](../../../../resources/docker/img_10.png)
 
       - CLi commands:
           - docker network ls : shows network
@@ -206,8 +215,7 @@ Networking types:
 
 - `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6 addressing. The VLAN driver builds on top
   of that in giving operators complete control of layer 2 VLAN tagging and even IPvlan L3 routing for users interested
-  in
-  underlay network integration.
+  in underlay network integration.
 
 
 - `macvlan`: Macvlan networks allow you to assign a MAC address to a container, making it appear as a physical device on
@@ -243,10 +251,12 @@ Networking types:
 #### DNS - How containers find each other
 
 Docker daemon has a build-in DNS (Domain Name System) server that containers use by default.
-DNS allows containers to use domain names to communicate with each other instead of IP addresses.
+DNS allows containers to use domain names to communicate with each other instead of IP addresses. 
+
+Important to use **--name** flag for it.
 
 This allows for easier communication between containers and can help to abstract away network details from containerized
-applications.
+applications. 
 
 ### Dockerfile
 
@@ -383,6 +393,15 @@ services: # containers. same as docker run
   network: # Optional, same as docker network create
 
 ```
+
+    - CLI commands:
+      - docker-compose build
+      - docker-compose up
+      - docker-compose down
+      - docker-compose down --rmi all --volumes : delete all image and volumes
+      - docker-compose <container name> : We can check running containers logs
+
+
 
 Bonus Note: version v2.x is actually better for local docker-compose use, and v3.x is better for use in server
 clusters (Swarm and Kubernetes)
