@@ -157,6 +157,26 @@ driver has its own characteristics and supports various output formats and desti
 - splunk
 
 [Read More](https://gdevillele.github.io/engine/admin/logging/overview/)
+___
+
+### Namespaces
+
+It is allowing multiple containers to run on a single host while maintaining the illusion of separate, isolated environments.
+
+Docker namespaces achieve this by partitioning various system resources and process identifiers, preventing containers
+from interfering with each other or the host system.
+
+Inside the container you <u>can not</u> see the host processes but from the host you can see the containers processes.
+
+**Container:**
+
+![](../../../../resources/docker/img_1.png)
+
+**Host:**
+
+![](../../../../resources/docker/img_11.png)
+
+___
 
 ### Docker Networks (Concepts)
 
