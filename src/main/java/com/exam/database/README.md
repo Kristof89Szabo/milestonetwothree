@@ -121,6 +121,7 @@ In Apache Cassandra:
 ![](../../../../resources/database/img.png)
 
 - `Graph database` : Shows different entities in the database and how they connect in a graphical way.
+
 ___
 
 ### Normalization vs Denormalization
@@ -147,7 +148,8 @@ inserts and updates. This method of data storage takes up more memory.
   database's integrity, the changes are rolled back, and the database remains unchanged.
 
 
-- `Isolation`: Isolation ensures that concurrent transactions do not interfere with each other. Each transaction operates
+- `Isolation`: Isolation ensures that concurrent transactions do not interfere with each other. Each transaction
+  operates
   in isolation from other transactions, as if it were executed sequentially. This prevents issues such as dirty reads,
   non-repeatable reads, and phantom reads. Isolation levels, such as Read Uncommitted, Read Committed, Repeatable Read,
   and Serializable, define the degree of isolation provided by a database system.
@@ -218,6 +220,26 @@ three properties:
 
 ![](../../../../resources/database/img_13.png)
 
+#### What is a schema?
+
+A schema refers to a collection of database objects, including tables, views, indexes, stored procedures, and
+more. It's essentially a way to organize and group related database elements. Using schemas can provide several benefits
+for database management and security:
+
+- `Logical Organization`: Schemas help in logically organizing the database objects, making it easier to manage and navigate
+complex databases.
+
+
+- `Access Control`: Schemas allow you to control access to specific sets of tables and objects. By assigning permissions at
+the schema level, you can restrict users' access to certain parts of the database.
+
+
+- `Security Isolation`: Schemas can provide an additional layer of security isolation between different parts of your
+application. You can have separate schemas for different modules or components of your application.
+
+
+- `Namespace Separation`: Schemas provide a way to avoid naming conflicts between objects. Different schemas can have
+objects with the same name without causing conflicts.
 
 ### Clustering and replication
 
