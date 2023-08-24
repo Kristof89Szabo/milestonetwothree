@@ -185,6 +185,7 @@ three properties:
 - AP
 
 ![](../../../../resources/database/img_9.png)
+___
 
 ### Database basic security
 
@@ -226,21 +227,109 @@ A schema refers to a collection of database objects, including tables, views, in
 more. It's essentially a way to organize and group related database elements. Using schemas can provide several benefits
 for database management and security:
 
-- `Logical Organization`: Schemas help in logically organizing the database objects, making it easier to manage and navigate
-complex databases.
+- `Logical Organization`: Schemas help in logically organizing the database objects, making it easier to manage and
+  navigate
+  complex databases.
 
 
-- `Access Control`: Schemas allow you to control access to specific sets of tables and objects. By assigning permissions at
-the schema level, you can restrict users' access to certain parts of the database.
+- `Access Control`: Schemas allow you to control access to specific sets of tables and objects. By assigning permissions
+  at
+  the schema level, you can restrict users' access to certain parts of the database.
 
 
 - `Security Isolation`: Schemas can provide an additional layer of security isolation between different parts of your
-application. You can have separate schemas for different modules or components of your application.
+  application. You can have separate schemas for different modules or components of your application.
 
 
 - `Namespace Separation`: Schemas provide a way to avoid naming conflicts between objects. Different schemas can have
-objects with the same name without causing conflicts.
+  objects with the same name without causing conflicts.
 
+___
+
+### Database Constrains
+
+Set of `RULES` that the database system checks anytime that we do an operation to
+make sure it's not breaking any of the overall rules that we have create previously.
+> Example: We can not delete author because in book there is a foreign key for the same author.
+
+| author_id | author_name | 
+|-----------|-------------|
+| 1         | J.K Rowling |
+
+| book_id | book_name                   | author_id |
+|---------|-----------------------------|-----------|
+| 1       | The Philosopher's Stone     | 1         |
+| 2       | StoneThe Chamber of Secrets | 1         |
+
+Types:
+
+- `DEFAULT` :  Allows us to define a value to be used for a given column when no data is provided at insert time.
+
+- `CHECK` : Define a logical condition that will generate an error if it returns **FALSE**. (Example: do not allow
+  negative number to **age** column)
+
+- `UNIQUE KEY` : They guarantee that values in a row do not repeat in another.
+
+- `PRIMARY KEY` : Each table can have only one primary key defined, which guarantees two things at row level:
+    - Key is unique.
+    - Key have non-null
+
+- `FOREIGN KEY` : They guarantee that each row in a child table (like Book) has one and only one row associated in a
+  parent table (like Author).
+
+___
+
+#### Dump and Load
+
+Dump and load are database management operations used for backing up and restoring databases.
+
+`Dump` file contains all the information necessary to recreate the database.
+`Loading` refers to the process of taking this dump file and using it to recreate the database,
+
+#### Bulk upload / Batch
+
+Refers to the process of inserting a large amount of data into a database in a single operation, rather than one row at
+a
+time. This is often more efficient than individual inserts because it reduces the overhead of repeatedly communicating
+with the database server.
+
+Example:
+
+```java
+public class BulkInsertExample {
+
+    public static void main(String[] args) {
+        String jdbcUrl = "jdbc:mysql://localhost:3306/your_database";
+        String username = "your_username";
+        String password = "your_password";
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            String insertQuery = "INSERT INTO users (username, email) VALUES (?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+
+            List<String> userDataLines = Files.readAllLines(Paths.get("user_data.txt"));
+
+            for (String userData : userDataLines) {
+                String[] parts = userData.split(",");
+                String usernameValue = parts[0];
+                String emailValue = parts[1];
+
+                preparedStatement.setString(1, usernameValue);
+                preparedStatement.setString(2, emailValue);
+
+                preparedStatement.addBatch();
+            }
+
+            int[] result = preparedStatement.executeBatch();
+            System.out.println("Number of rows inserted: " + result.length);
+
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+___
 ### Clustering and replication
 
 ##### <u>Clustering</u>
